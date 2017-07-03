@@ -1,23 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
+import { NativeRouter, Route, Link } from 'react-router-native';
+
+import Home from './components/Home';
+import Game from './components/Game';
+import { styles } from './styles/App';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <NativeRouter>
+        <View style={styles.container}>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/game' component={Game} />
+        </View>
+      </NativeRouter>
     );
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
