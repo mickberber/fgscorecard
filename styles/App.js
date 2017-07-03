@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center'
   },
   buttonscontainer: {
     alignItems: 'center',
@@ -35,15 +36,6 @@ export const styles = StyleSheet.create({
     lineHeight: 50,
     marginBottom: 20,
   },
-  removebutton: {
-    backgroundColor: 'black',
-    fontWeight: 'bold',
-    color: 'white',
-    height: 25,
-    width: 25,
-    textAlign: 'center',
-    lineHeight: 25,
-  },
   statisticsbutton: {
     backgroundColor: '#2b6cdb',
     fontWeight: 'bold',
@@ -52,9 +44,33 @@ export const styles = StyleSheet.create({
     width: 250,
     textAlign: 'center',
     lineHeight: 50,
+    marginBottom: 15,
   },
   signupInput: {
+    backgroundColor: 'white',
+    margin: 50,
     height: 50,
     width: 250,
+  },
+  playerrow: {
+    flexDirection: 'row',
+    margin: 5,
+  },
+  playername: {
+    width: 300,
+    height: 50,
+    backgroundColor: 'white',
+    fontSize: 20,
+    lineHeight: 50,
+    textAlign: 'center',
+  },
+  removebutton: {
+    backgroundColor: 'black',
+    fontWeight: 'bold',
+    color: 'white',
+    height: 50,
+    width: 50,
+    textAlign: 'center',
+    lineHeight: 50,
   },
 });

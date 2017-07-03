@@ -12,7 +12,8 @@ export default class Game extends React.Component {
 
     this.state = {
       currentHole: null,
-      players: []
+      players: [],
+      totalPlayers: 0,
     }
 
     this._playersignup = this._playersignup.bind(this);
@@ -23,6 +24,7 @@ export default class Game extends React.Component {
       case 'add':
         this.setState({
           players: this.state.players.concat(player),
+          totalPlayers: this.state.totalPlayers + 1,
         });
         break;
       case 'remove':
@@ -47,7 +49,8 @@ export default class Game extends React.Component {
     console.log('render', this.state)
     if (this.state.currentHole === null) {
       return <PlayerSignup players={this.state.players}
-                           playersignup={this._playersignup} />
+                           playersignup={this._playersignup}
+                           totalPlayers={this.state.totalPlayers} />
     }
     const currentHole = this.state.currentHole;
     const coursehalf = (currentHole > 9) ?
