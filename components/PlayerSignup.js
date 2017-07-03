@@ -43,7 +43,7 @@ export default class PlayerSignup extends React.Component {
         <TouchableHighlight onPress={this.addPlayer}>
           <Text style={styles.resumebutton}>Add</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={this.addPlayer}>
+        <TouchableHighlight onPress={() => { this.props.playersignup('finish'); }}>
           <Text style={styles.statisticsbutton}>Start Game</Text>
         </TouchableHighlight>
         <FlatList data={this.props.players}
