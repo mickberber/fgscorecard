@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableHighlight, View, FlatList } from 'react-native';
+import { Alert, Text, Modal, TouchableHighlight, View, FlatList } from 'react-native';
 
 import PlayerSignup from './../signup/PlayerSignup';
 import FinishGame from './../finish/FinishGame';
@@ -22,6 +22,7 @@ export default class Game extends React.Component {
       currentHole: null,
       players: [],
       totalPlayers: 0,
+      showModal: false,
       course: MonarchBay,
       courseTitle: 'Monarch Bay',
     }
@@ -29,6 +30,8 @@ export default class Game extends React.Component {
     this._playersignup = this._playersignup.bind(this);
     this._pickCourse = this._pickCourse.bind(this);
     this._incrementscore = this._incrementscore.bind(this);
+    this._toggleModal = this._toggleModal.bind(this);
+    this._quitgame = this._quitgame.bind(this);
   }
 
   _pickCourse(course) {
@@ -113,6 +116,23 @@ export default class Game extends React.Component {
     });
   }
 
+  _toggleModal() {
+    this.setState({
+      showModal: !this.state.showModal,
+    });
+  }
+
+  _quitgame() {
+    this.setState({
+      currentHole: null,
+      players: [],
+      totalPlayers: 0,
+      course: MonarchBay,
+      courseTitle: 'Monarch Bay',
+      showModal: !this.state.showModal,
+    });
+  };
+
   render() {
     if (this.state.currentHole === null) {
       return <PlayerSignup players={this.state.players}
@@ -146,15 +166,35 @@ export default class Game extends React.Component {
                         coursehalf={coursehalf}
                         currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
         </View>
+        <TouchableHighlight onPress={() => { this._finishhole(); }}>
+          <Text style={styles.resumebutton}>Finish Hole</Text>
+        </TouchableHighlight>
         <View style={{flex: 2}}>
           <FlatList data={this.state.players}
                     renderItem={(player) => <GamePlayer player={player}
                                                         currentHole={this.state.currentHole}
                                                         incrementscore={this._incrementscore} />} />
         </View>
-        <TouchableHighlight onPress={() => { this._finishhole(); }}>
-          <Text style={styles.resumebutton}>Finish Hole</Text>
+        <TouchableHighlight onPress={() => { this._toggleModal(); }}>
+          <Text style={styles.resumebutton}>Quit Game</Text>
         </TouchableHighlight>
+        <Modal animationType={"slide"}
+               transparent={false}
+               visible={this.state.showModal}>
+               <View style={{
+                 flex: 1,
+                 justifyContent: 'center',
+                 alignItems: 'center',
+                 backgroundColor: 'grey'
+               }} >
+                 <TouchableHighlight onPress={() => { this._toggleModal(); }}>
+                   <Text style={styles.newbutton}>Resume</Text>
+                 </TouchableHighlight>
+                 <TouchableHighlight onPress={() => { this._quitgame(); }}>
+                   <Text style={styles.quitbutton}>Quit</Text>
+                 </TouchableHighlight>
+               </View>
+        </Modal>
       </View>
     );
   }

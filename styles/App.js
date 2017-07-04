@@ -43,6 +43,16 @@ export const styles = StyleSheet.create({
     lineHeight: 50,
     marginBottom: 20,
   },
+  quitbutton: {
+    backgroundColor: '#cc2828',
+    fontWeight: 'bold',
+    color: 'white',
+    height: 50,
+    width: 250,
+    textAlign: 'center',
+    lineHeight: 50,
+    marginBottom: 20,
+  },
   picker: {
     width: 250,
     justifyContent: 'center'

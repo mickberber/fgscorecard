@@ -4,6 +4,12 @@ import { Link } from 'react-router-native';
 
 import FinishedPlayer from './FinishedPlayer';
 import { styles } from './../../styles/App';
+import {
+  MonarchBay,
+  Pruneridge,
+  LasPositas,
+  SantaTeresa
+} from './../../courses/courses';
 
 export default class FinishGame extends React.Component {
   constructor(props) {
@@ -12,6 +18,7 @@ export default class FinishGame extends React.Component {
       props.location.query.players : this.props.players;
     this.courseTitle = props.location.query ?
       props.location.query.courseTitle : this.props.courseTitle;
+    this.course = MonarchBay;
     this.state = {
       games: [],
       totalGames: null,
@@ -57,6 +64,9 @@ export default class FinishGame extends React.Component {
       <View style={styles.container}>
         <Text style={styles.statsapptitle}>fgScorecard</Text>
         <Text style={styles.statscoursetitle}>{this.courseTitle}</Text>
+        <FlatList data={this.course.holes}
+                  horizontal={true}
+                  renderItem={(hole) => <Text style={styles.scorebox}>{hole.item.par}</Text>} />
         <FlatList data={this.players}
                   renderItem={(player) => <FinishedPlayer player={player} />} />
         {!this.state.finished ? <TouchableHighlight onPress={() => { this._finishgame(); }}>
