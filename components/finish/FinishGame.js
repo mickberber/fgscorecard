@@ -8,7 +8,7 @@ import { styles } from './../../styles/App';
 export default class FinishGame extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
+    console.log('props',props)
     this.state = {
       games: [],
       totalGames: null,

@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, View, AsyncStorage, FlatList, TouchableHighlight, Dimensions } from 'react-native';
 import { Link } from 'react-router-native';
 
-import FinishGame from './../finish/FinishGame';
 import { styles } from './../../styles/App';
 
 export default class Statistics extends React.Component {
@@ -67,7 +66,6 @@ export default class Statistics extends React.Component {
       <FlatList data={this.state.games}
                 horizontal={false}
                 renderItem={(game) => {
-                  console.log('game', game)
                   return <View style={{
                     width: width - 4,
                     borderBottomWidth: 1,
@@ -77,13 +75,7 @@ export default class Statistics extends React.Component {
                   }}>
                     <Text style={styles.statscoursetitle}>
                       {game.item.courseTitle}
-                      <Link style={styles.statsdetailslink}
-                            to={`/statistics/${game.index}`}
-                            component={() => {
-                              return (<FinishGame players={game.item.players}
-                                                  game={game.item}
-                                                  course={game.item.courseTitle} />);
-                            }}>
+                      <Link style={styles.statsdetailslink} to='/'>
                         <Text style={styles.statsdetailsbutton}>Details</Text>
                       </Link>
                     </Text>
