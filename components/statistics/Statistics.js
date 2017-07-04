@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, AsyncStorage } from 'react-native';
 import { Link } from 'react-router-native';
 
-import { styles } from './../styles/App';
+import { styles } from './../../styles/App';
 
 export default class Statistics extends React.Component {
   constructor(props) {

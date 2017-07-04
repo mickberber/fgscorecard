@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, FlatList, AsyncStorage, TouchableHighlight } from 'react-native';
 
 import FinishedPlayer from './FinishedPlayer';
-import { styles } from './../styles/App';
+import { styles } from './../../styles/App';
 
 export default class FinishGame extends React.Component {
   constructor(props) {

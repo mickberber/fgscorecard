@@ -1,18 +1,18 @@
 import React from 'react';
 import { Text, TouchableHighlight, View, FlatList } from 'react-native';
 
+import PlayerSignup from './../signup/PlayerSignup';
+import FinishGame from './../finish/FinishGame';
 import CourseHeader from './CourseHeader';
-import PlayerSignup from './PlayerSignup';
 import GamePlayer from './GamePlayer';
-import FinishGame from './FinishGame';
 
 import {
   MonarchBay,
   Pruneridge,
   LasPositas,
   SantaTeresa
-} from './../courses/courses';
-import { styles } from './../styles/App';
+} from './../../courses/courses';
+import { styles } from './../../styles/App';
 
 export default class Game extends React.Component {
   constructor(props) {

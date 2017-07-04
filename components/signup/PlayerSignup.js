@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import Player from './Player';
-import { styles } from './../styles/App';
+import { styles } from './../../styles/App';
 
 export default class PlayerSignup extends React.Component {
   constructor(props) {
@@ -54,7 +54,7 @@ export default class PlayerSignup extends React.Component {
     return (
       <View style={styles.container}>
         <Image style={styles.image}
-               source={require('./../assets/footgolf.jpg')}>
+               source={require('./../../assets/footgolf.jpg')}>
         <TextInput style={styles.signupInput}
                    value={this.state.text}
                    placeholder='     Enter name....'

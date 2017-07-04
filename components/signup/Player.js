@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 
-import { styles } from './../styles/App';
+import { styles } from './../../styles/App';
 
 const Player = props => {
   return (

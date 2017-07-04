@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import { styles } from './../styles/App';
+import { styles } from './../../styles/App';
 
 const FinishedPlayer = props => {
   const scores = props.player.item.scores;

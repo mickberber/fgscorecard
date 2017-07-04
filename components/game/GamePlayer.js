@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Text, TouchableHighlight, View } from 'react-native';
 
-import { styles } from './../styles/App';
+import { styles } from './../../styles/App';
 
 class GamePlayer extends React.Component {
   constructor(props) {

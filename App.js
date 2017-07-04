@@ -3,8 +3,8 @@ import { View } from 'react-native';
 import { NativeRouter, Route, Link } from 'react-router-native';
 
 import Home from './components/Home';
-import Game from './components/Game';
-import Statistics from './components/Statistics';
+import Game from './components/game/Game';
+import Statistics from './components/statistics/Statistics';
 
 import { styles } from './styles/App';
 
