@@ -142,5 +142,20 @@ export const styles = StyleSheet.create({
     lineHeight: 30,
     borderColor: 'black',
     borderWidth: 1,
-  }
+  },
+  // Stats Pages
+  statstitle: {
+    fontWeight: 'bold',
+    marginTop: 10,
+    fontSize: 20,
+  },
+  statsplayercontainer: {
+    alignItems: 'center',
+    marginLeft: 5,
+    marginRight: 5,
+  },
+  statsname: {
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
 });

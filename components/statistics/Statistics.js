@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, AsyncStorage } from 'react-native';
+import { Text, View, AsyncStorage, FlatList } from 'react-native';
 import { Link } from 'react-router-native';
 
 import { styles } from './../../styles/App';
@@ -54,29 +54,29 @@ export default class Statistics extends React.Component {
   }
 
   render() {
-    let games = this.state.games.map((game, i) => {
-      return (<View key={i}>
-        <Text>Course: {game.courseTitle}</Text>
-        {game.players.map((player, i) => {
-          let totalscore = 0;
-          player.scores.forEach((score) => {
-            totalscore = totalscore + score;
-          });
-          return (
-            <View key={i * 64}>
-              <Text>{player.name}</Text>
-              <Text>{totalscore}</Text>
-            </View>
-          );
-        })}
-      </View>);
-    });
     return (
       <View style={styles.container}>
         <Link to='/'>
-            <Text style={styles.newbutton}>Home</Text>
-        </Link>
-        {games}
+        <Text style={styles.newbutton}>Home</Text>
+      </Link>
+      <FlatList data={this.state.games}
+                horizontal={false}
+                renderItem={(game) => {
+                  return <View style={{flex: 1}}>
+                    <Text style={styles.statstitle}>Course: {game.item.courseTitle}</Text>
+                    <FlatList data={game.item.players}
+                              horizontal={true}
+                              renderItem={(player) => {
+                                let totalscore = player.item.scores.reduce((acc, score) => {
+                                  return acc + score.score;
+                                }, 0);
+                                return <View style={styles.statsplayercontainer}>
+                                  <Text style={styles.statsname}>{player.item.name}</Text>
+                                  <Text>{totalscore}</Text>
+                                </View>
+                              }} />
+                  </View>
+                }}/>
       </View>
     );
   }

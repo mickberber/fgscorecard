@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Text, TouchableHighlight, View } from 'react-native';
+import { Alert, Text, TouchableHighlight, View, FlatList } from 'react-native';
 
 import { styles } from './../../styles/App';
 
@@ -17,11 +17,12 @@ class GamePlayer extends React.Component {
   }
 
   render() {
-    const scores = this.props.player.item.scores;
-    const totalscore = scores.reduce((score, acc) => {
+    const scores = this.props.player.item.scores.slice();
+    const totalscore = scores.reduce((acc, score, index) => {
+      scores[index] = {key: index, score};
       return acc + score;
     }, 0);
-    const currentscore = this.props.player.item.scores[this.props.currentHole - 1] || 0;
+    const currentscore = scores[this.props.currentHole - 1].score || 0;
 
     return (
       <View style={styles.playerdisplayrow}>
@@ -39,9 +40,11 @@ class GamePlayer extends React.Component {
         </View>
         {/*  END TODO */}
         <View style={styles.scoredisplayrow2}>
-          {this.props.player.item.scores.map((score, i) => {
-            return (<Text key={i} style={styles.scorebox}>{score}</Text>);
-          })}
+          <FlatList data={scores}
+                    horizontal={true}
+                    renderItem={(score) => {
+                      return <Text style={styles.scorebox}>{score.item.score}</Text>
+                    }} />
         </View>
       </View>
     );

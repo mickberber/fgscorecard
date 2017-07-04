@@ -18,6 +18,8 @@ export default class FinishGame extends React.Component {
   _finishgame() {
     (async () => {
       try {
+        // Use to clear db
+        // const val = await AsyncStorage.setItem('games', JSON.stringify([]));
         const val = await AsyncStorage.setItem('games', JSON.stringify(this.state.games.concat([this.props.game])));
         this.setState({
           finished: true,
@@ -54,7 +56,7 @@ export default class FinishGame extends React.Component {
         {!this.state.finished ? <TouchableHighlight onPress={() => { this._finishgame(); }}>
             <Text style={styles.resumebutton}>Save Game</Text>
           </TouchableHighlight> : null}
-        {!this.state.finished ? <Link to='/statistics'>
+        {this.state.finished ? <Link to='/statistics'>
           <Text style={styles.statisticsbutton}>Statistics</Text>
         </Link> : null}
       </View>

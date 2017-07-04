@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 
 import { styles } from './../../styles/App';
 
 const FinishedPlayer = props => {
   const scores = props.player.item.scores;
-  const totalscore = scores.reduce((score, acc) => {
+  const totalscore = scores.reduce((acc, score, index) => {
+    scores[index] = {key: index, score};
     return acc + score;
   }, 0);
 
@@ -16,9 +17,11 @@ const FinishedPlayer = props => {
         <Text style={styles.removebutton}>{totalscore}</Text>
       </View>
      <View style={styles.scoredisplayrow2}>
-        {props.player.item.scores.map((score, i) => {
-          return (<Text key={i} style={styles.scorebox}>{score}</Text>);
-        })}
+       <FlatList data={scores}
+                 horizontal={true}
+                 renderItem={(score) => {
+                   return <Text style={styles.scorebox}>{score.item.score}</Text>
+                 }} />
       </View>
     </View>
   );
