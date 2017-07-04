@@ -14,6 +14,8 @@ export default class CourseHeader extends React.Component {
           <Text style={styles.courseheader}>Course Totals</Text>
           <Text style={styles.courseyardpar}>Total Yardage: {this.props.totalYardage}</Text>
           <Text style={styles.courseyardpar}>Par: {this.props.totalPar}</Text>
+        </View>
+        <View style={styles.detailscolumn}>
           <Text style={styles.courseheader}>{(this.props.currentHole > 9) ? 'Back' : 'Front'} 9: Totals</Text>
           <Text style={styles.courseyardpar}>Total Yardage: {this.props.coursehalf.totalYardage}</Text>
           <Text style={styles.courseyardpar}>Par: {this.props.coursehalf.par}</Text>

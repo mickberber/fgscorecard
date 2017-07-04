@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     width: 250,
     textAlign: 'center',
     lineHeight: 50,
-    marginBottom: 20,
+    margin: 20,
   },
   statisticsbutton: {
     backgroundColor: '#2b6cdb',
@@ -105,6 +105,14 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     margin: 5,
+  },
+  gameplayername: {
+    width: 150,
+    height: 50,
+    backgroundColor: 'white',
+    fontSize: 20,
+    lineHeight: 50,
+    textAlign: 'center',
   },
   scoredisplayrow1: {
     flexDirection: 'row',

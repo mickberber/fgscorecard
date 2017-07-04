@@ -108,20 +108,23 @@ export default class Game extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.coursetitle}>{this.state.course.title}</Text>
-        <CourseHeader totalYardage={this.state.course.total.totalYardage}
-                      totalPar={this.state.course.total.par}
-                      currentHole={currentHole}
-                      coursehalf={coursehalf}
-                      currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
+        <View style={{flex: 1}}>
+          <Text style={styles.coursetitle}>{this.state.course.title}</Text>
+          <CourseHeader totalYardage={this.state.course.total.totalYardage}
+                        totalPar={this.state.course.total.par}
+                        currentHole={currentHole}
+                        coursehalf={coursehalf}
+                        currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
+        </View>
+        <View style={{flex: 2}}>
+          <FlatList data={this.state.players}
+                    renderItem={(player) => <GamePlayer player={player}
+                                                        currentHole={this.state.currentHole}
+                                                        incrementscore={this._incrementscore} />} />
+        </View>
         <TouchableHighlight onPress={() => { this._finishhole(); }}>
           <Text style={styles.resumebutton}>Finish Hole</Text>
         </TouchableHighlight>
-        <FlatList data={this.state.players}
-                  renderItem={(player) => <GamePlayer player={player}
-                                                      currentHole={this.state.currentHole}
-                                                      incrementscore={this._incrementscore} />} />
-
       </View>
     );
   }
