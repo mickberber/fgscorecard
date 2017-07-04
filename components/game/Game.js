@@ -64,7 +64,7 @@ export default class Game extends React.Component {
       case 'finish':
         players = this.state.players.map((player) => {
           return Object.assign({}, player, {
-            scores: player.scores.concat([0])
+            scores: player.scores.concat([{key: 0, score: 0}])
           });
         });
         let course = this._pickCourse(options);
@@ -85,12 +85,13 @@ export default class Game extends React.Component {
       if (player.key !== playerkey) {
         return player;
       } else {
-        const oldscore = player.scores[this.state.currentHole - 1];
+        const key = player.scores[this.state.currentHole - 1].key;
+        const oldscore = player.scores[this.state.currentHole - 1].score;
         const newscore = (sign === '+') ?
           oldscore + 1 : oldscore - 1;
         return Object.assign({}, player, {
           scores: player.scores.slice(0, this.state.currentHole - 1)
-                               .concat([newscore])
+                               .concat([{key, score: newscore}])
         });
       }
     });
@@ -103,7 +104,7 @@ export default class Game extends React.Component {
   _finishhole() {
     const players = this.state.players.map((player) => {
       return Object.assign({}, player, {
-        scores: player.scores.concat([0]),
+        scores: player.scores.concat([{key: this.state.currentHole, score: 0}]),
       });
     });
     this.setState({

@@ -4,10 +4,9 @@ import { Text, View, FlatList } from 'react-native';
 import { styles } from './../../styles/App';
 
 const FinishedPlayer = props => {
-  const scores = props.player.item.scores;
+  const scores = props.player.item.scores.slice();
   const totalscore = scores.reduce((acc, score, index) => {
-    scores[index] = {key: index, score};
-    return acc + score;
+    return acc + score.score;
   }, 0);
 
   return (

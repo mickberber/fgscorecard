@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   // HOME
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
@@ -42,12 +41,19 @@ export const styles = StyleSheet.create({
     width: 250,
     textAlign: 'center',
     lineHeight: 50,
-    margin: 20,
+    marginBottom: 20,
   },
   picker: {
     width: 250,
-    flex: 1,
     justifyContent: 'center'
+  },
+  pickcourse: {
+    marginTop: 20,
+    width: 250,
+    alignItems: 'flex-start',
+    fontWeight: 'bold',
+    backgroundColor: '#2b6cdb',
+    color: 'white',
   },
   statisticsbutton: {
     backgroundColor: '#2b6cdb',
@@ -62,7 +68,7 @@ export const styles = StyleSheet.create({
   // PLAYER SIGNUP
   signupInput: {
     backgroundColor: 'white',
-    margin: 50,
+    marginBottom: 10,
     marginLeft: 125,
     height: 50,
     width: 250,

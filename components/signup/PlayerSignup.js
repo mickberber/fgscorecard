@@ -10,6 +10,7 @@ import {
   TextInput,
   FlatList
 } from 'react-native';
+import { Link } from 'react-router-native';
 
 import Player from './Player';
 import { styles } from './../../styles/App';
@@ -55,41 +56,45 @@ export default class PlayerSignup extends React.Component {
       <View style={styles.container}>
         <Image style={styles.image}
                source={require('./../../assets/footgolf.jpg')}>
-        <TextInput style={styles.signupInput}
-                   value={this.state.text}
-                   placeholder='     Enter name....'
-                   onChangeText={(text) => this.setState({text})} />
-        <TouchableHighlight onPress={this._addPlayer}>
-          <Text style={styles.resumebutton}>Add</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => { this._togglePicker(); }}>
-           <Text style={styles.resumebutton}>{this.state.course}</Text>
-        </TouchableHighlight>
-        {/*  TODO: refactor modal into it's own component */}
-        <Modal animationType={"slide"}
-               transparent={false}
-               visible={this.state.renderPicker}>
-          <Picker style={styles.picker}
-                  selectedValue={this.state.course}
-                  onValueChange={(course) => {
-                    this.setState({
-                      course,
-                      renderPicker: false,
-                    });
-                  }}>
-            <Picker.Item label={"Monarch Bay"} value={"Monarch Bay"} />
-            <Picker.Item label={"Pruneridge"} value={"Pruneridge"} />
-            <Picker.Item label={'Las Positas'} value={'Las Positas'} />
-            <Picker.Item label={'Santa Teresa'} value={'Santa Teresa'} />
-          </Picker>
-        </Modal>
-        {/* END TODO */}
-        <TouchableHighlight onPress={() => { this.props.playersignup('finish', this.state.course); }}>
-          <Text style={styles.statisticsbutton}>Start Game</Text>
-        </TouchableHighlight>
-        <FlatList data={this.props.players}
-                  renderItem={(player) => <Player player={player}
-                                                  removePlayer={this._removePlayer} />} />
+           <Text style={styles.pickcourse}>Pick course: </Text>
+           <TouchableHighlight onPress={() => { this._togglePicker(); }}>
+              <Text style={styles.statisticsbutton}>{this.state.course}</Text>
+           </TouchableHighlight>
+           {/*  TODO: refactor modal into it's own component */}
+           <Modal animationType={"slide"}
+                  transparent={false}
+                  visible={this.state.renderPicker}>
+             <Picker style={styles.picker}
+                     selectedValue={this.state.course}
+                     onValueChange={(course) => {
+                       this.setState({
+                         course,
+                         renderPicker: false,
+                       });
+                     }}>
+               <Picker.Item label={"Monarch Bay"} value={"Monarch Bay"} />
+               <Picker.Item label={"Pruneridge"} value={"Pruneridge"} />
+               <Picker.Item label={'Las Positas'} value={'Las Positas'} />
+               <Picker.Item label={'Santa Teresa'} value={'Santa Teresa'} />
+             </Picker>
+           </Modal>
+           {/* END TODO */}
+          <TextInput style={styles.signupInput}
+                     value={this.state.text}
+                     placeholder='     Enter name....'
+                     onChangeText={(text) => this.setState({text})} />
+          <TouchableHighlight onPress={this._addPlayer}>
+            <Text style={styles.statisticsbutton}>Add Player</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={() => { this.props.playersignup('finish', this.state.course); }}>
+            <Text style={styles.statisticsbutton}>Start Game</Text>
+          </TouchableHighlight>
+          <FlatList data={this.props.players}
+                    renderItem={(player) => <Player player={player}
+                                                    removePlayer={this._removePlayer} />} />
+          <Link to='/'>
+            <Text style={styles.newbutton}>Home</Text>
+          </Link>
         </Image>
       </View>
     );

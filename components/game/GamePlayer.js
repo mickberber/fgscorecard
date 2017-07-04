@@ -19,8 +19,7 @@ class GamePlayer extends React.Component {
   render() {
     const scores = this.props.player.item.scores.slice();
     const totalscore = scores.reduce((acc, score, index) => {
-      scores[index] = {key: index, score};
-      return acc + score;
+      return acc + score.score;
     }, 0);
     const currentscore = scores[this.props.currentHole - 1].score || 0;
 
