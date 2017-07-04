@@ -10,6 +10,7 @@ import {
   TextInput,
   FlatList
 } from 'react-native';
+import { Link } from 'react-router-native';
 
 import Player from './Player';
 import { styles } from './../styles/App';

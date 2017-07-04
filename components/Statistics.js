@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, FlatList, AsyncStorage } from 'react-native';
+import { Link } from 'react-router-native';
 
 import { styles } from './../styles/App';
 
@@ -72,6 +73,9 @@ export default class Statistics extends React.Component {
     });
     return (
       <View style={styles.container}>
+        <Link to='/'>
+            <Text style={styles.newbutton}>Home</Text>
+        </Link>
         {games}
       </View>
     );
