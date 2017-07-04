@@ -145,9 +145,6 @@ export const styles = StyleSheet.create({
   },
   // Stats Pages
   statscontainer: {
-    // flex: 1,
-    // alignSelf: 'stretch',
-    // width: Dimensions.get('window').width,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
@@ -158,6 +155,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Baskerville',
     fontSize: 35,
     marginTop: 20,
+    marginBottom: 5,
     height: 50,
   },
   statscoursetitle: {
@@ -169,17 +167,18 @@ export const styles = StyleSheet.create({
   },
   statsdetailslink: {
     height: 30,
-    width: 50,
+    width: 110,
+    backgroundColor: '#2b6cdb',
+    marginLeft: 30,
   },
   statsdetailsbutton: {
-    marginLeft: 30,
+    marginLeft: 25,
     fontWeight: 'bold',
     height: 30,
     width: 60,
     textAlign: 'center',
     lineHeight: 30,
     color: 'white',
-    backgroundColor: '#009e0a',
   },
   statsplayercontainer: {
     alignItems: 'flex-start',
