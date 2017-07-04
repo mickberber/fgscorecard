@@ -5,6 +5,7 @@ import { Link } from 'react-router-native';
 import PlayerSignup from './PlayerSignup';
 import GamePlayer from './GamePlayer';
 import CourseHeader from './CourseHeader';
+import FinishGame from './FinishGame';
 import { MonarchBay } from './../courses/courses';
 import { styles } from './../styles/App';
 
@@ -88,17 +89,24 @@ export default class Game extends React.Component {
   render() {
     if (this.state.currentHole === null) {
       return <PlayerSignup players={this.state.players}
-                           playersignup={this._playersignup}
-                           totalPlayers={this.state.totalPlayers} />
-    }
-
-    if (this.state.currentHole === 19) {
-      return <FinishGame players={this.state.players} />
-    }
+        playersignup={this._playersignup}
+        totalPlayers={this.state.totalPlayers} />
+      }
 
     const currentHole = this.state.currentHole;
     const coursehalf = (currentHole > 9) ?
       this.state.course.back : this.state.course.front;
+
+    if (this.state.course.holes[this.state.currentHole - 1] === undefined) {
+      console.log('this.state.course.holes',this.state.course.holes)
+      console.log('this.state.currentHole',this.state.currentHole)
+      return <FinishGame players={this.state.players}
+                         totalYardage={this.state.course.total.totalYardage}
+                         totalPar={this.state.course.total.par}
+                         currentHole={currentHole}
+                         coursehalf={coursehalf}
+                         currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]}/>
+    }
 
     return (
       <View style={styles.container}>
