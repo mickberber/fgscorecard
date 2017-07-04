@@ -54,7 +54,7 @@ export default class Game extends React.Component {
     }
   }
 
-  _incrementscore(playerkey, sign) {
+  _incrementscore(sign, playerkey) {
     let players = this.state.players.map((player) => {
       if (player.key !== playerkey) {
         return player;
