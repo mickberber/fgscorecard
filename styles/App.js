@@ -8,6 +8,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  apptitle: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontFamily: 'Baskerville',
+    fontSize: 42,
+    marginBottom: 10,
+  },
   image: {
     flex: 1,
     justifyContent: 'center',

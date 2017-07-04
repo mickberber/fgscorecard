@@ -9,6 +9,7 @@ const Home = props => {
     <View style={styles.container}>
       <Image style={styles.image}
              source={require('./../assets/footgolf.jpg')}>
+        <Text style={styles.apptitle}> fgScorecard </Text>
         <View style={styles.buttonscontainer}>
           <Link to='/game'>
               <Text style={styles.newbutton}>New</Text>
