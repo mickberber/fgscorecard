@@ -113,8 +113,8 @@ export const Pruneridge = {
     par: 37,
   },
   front: {
-    totalYardage: 1027,
-    par: 33,
+    totalYardage: null,
+    par: null,
   },
   back: {
     totalYardage: null,

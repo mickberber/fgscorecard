@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList, AsyncStorage, TouchableHighlight } from 'react-native';
 
 import FinishedPlayer from './FinishedPlayer';
 import { styles } from './../styles/App';
@@ -8,6 +8,15 @@ export default class FinishGame extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  _finishgame() {
+    try {
+      // await AsyncStorage.setItem('', '');
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -22,7 +31,9 @@ export default class FinishGame extends React.Component {
           </View>
           <FlatList data={this.props.players}
                     renderItem={(player) => <FinishedPlayer player={player} />} />
-
+          <TouchableHighlight onPress={() => { this._finishgame(); }}>
+            <Text style={styles.resumebutton}>Save Game</Text>
+          </TouchableHighlight>
         </View>
       </View>
     );

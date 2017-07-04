@@ -37,6 +37,11 @@ export const styles = StyleSheet.create({
     lineHeight: 50,
     margin: 20,
   },
+  picker: {
+    width: 250,
+    flex: 1,
+    justifyContent: 'center'
+  },
   statisticsbutton: {
     backgroundColor: '#2b6cdb',
     fontWeight: 'bold',

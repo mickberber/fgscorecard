@@ -40,14 +40,28 @@ export default class Game extends React.Component {
         this.setState({ players });
         break;
       case 'finish':
+        // FIX SHITTY NAMING AND BE ASHAMED OF YOURSELF
+        let course = player;
         players = this.state.players.map((player) => {
           return Object.assign({}, player, {
             scores: player.scores.concat([0])
           });
         });
+        switch(course) {
+          case 'Monarch Bay':
+            course = MonarchBay;
+            break;
+          case 'Pruneridge':
+            course = Pruneridge;
+            break;
+          default:
+            course = MonarchBay;
+            break;
+        }
         this.setState({
           currentHole: 1,
           players,
+          course
         });
         break;
       default:
@@ -112,6 +126,7 @@ export default class Game extends React.Component {
           <Text style={styles.coursetitle}>{this.state.course.title}</Text>
           <CourseHeader totalYardage={this.state.course.total.totalYardage}
                         totalPar={this.state.course.total.par}
+                        totalHoles={this.state.course.holes.length}
                         currentHole={currentHole}
                         coursehalf={coursehalf}
                         currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
