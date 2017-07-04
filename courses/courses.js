@@ -168,3 +168,129 @@ export const Pruneridge = {
     },
   ],
 };
+
+export const LasPositas = {
+  title: 'Las Positas',
+  total: {
+    totalYardage: 1204,
+    par: 36,
+  },
+  front: {
+    totalYardage: null,
+    par: null,
+  },
+  back: {
+    totalYardage: null,
+    par: null,
+  },
+  holes: [
+    {
+      'number': 1,
+      'yardage': 126,
+      'par': 4,
+    },
+    {
+      'number': 2,
+      'yardage': 103,
+      'par': 3,
+    },
+    {
+      'number': 3,
+      'yardage': 175,
+      'par': 5,
+    },
+    {
+      'number': 4,
+      'yardage': 94,
+      'par': 3,
+    },
+    {
+      'number': 5,
+      'yardage': 100,
+      'par': 3,
+    },
+    {
+      'number': 6,
+      'yardage': 68,
+      'par': 3,
+    },
+    {
+      'number': 7,
+      'yardage': 165,
+      'par': 5,
+    },
+    {
+      'number': 8,
+      'yardage': 188,
+      'par': 5,
+    },
+    {
+      'number': 9,
+      'yardage': 185,
+      'par': 5,
+    },
+  ],
+};
+
+export const SantaTeresa = {
+  title: 'Santa Teresa',
+  total: {
+    totalYardage: 913,
+    par: 33,
+  },
+  front: {
+    totalYardage: null,
+    par: null,
+  },
+  back: {
+    totalYardage: null,
+    par: null,
+  },
+  holes: [
+    {
+      'number': 1,
+      'yardage': 112,
+      'par': 4,
+    },
+    {
+      'number': 2,
+      'yardage': 68,
+      'par': 3,
+    },
+    {
+      'number': 3,
+      'yardage': 88,
+      'par': 3,
+    },
+    {
+      'number': 4,
+      'yardage': 132,
+      'par': 4,
+    },
+    {
+      'number': 5,
+      'yardage': 84,
+      'par': 4,
+    },
+    {
+      'number': 6,
+      'yardage': 131,
+      'par': 4,
+    },
+    {
+      'number': 7,
+      'yardage': 156,
+      'par': 5,
+    },
+    {
+      'number': 8,
+      'yardage': 74,
+      'par': 3,
+    },
+    {
+      'number': 9,
+      'yardage': 68,
+      'par': 3,
+    },
+  ],
+};

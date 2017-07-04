@@ -1,6 +1,15 @@
 import React from 'react';
-import { Alert, Image, Text, Modal, TouchableHighlight, Picker, View, TextInput, FlatList } from 'react-native';
-import { Link } from 'react-router-native';
+import {
+  Alert,
+  Image,
+  Text,
+  Modal,
+  TouchableHighlight,
+  Picker,
+  View,
+  TextInput,
+  FlatList
+} from 'react-native';
 
 import Player from './Player';
 import { styles } from './../styles/App';
@@ -13,25 +22,25 @@ export default class PlayerSignup extends React.Component {
       course: 'Monarch Bay',
       renderPicker: false,
      };
-    this.addPlayer = this.addPlayer.bind(this);
-    this.removePlayer = this.removePlayer.bind(this);
+    this._addPlayer = this._addPlayer.bind(this);
+    this._removePlayer = this._removePlayer.bind(this);
   }
 
-  addPlayer() {
+  _addPlayer() {
     if (this.state.text === '') {
       Alert.alert('Please enter a name.');
       return;
     }
-    const newplayer = {
+
+    this.setState({ text: '' });
+    this.props.playersignup('add', {
       key: this.props.totalPlayers,
       name: this.state.text,
       scores: [],
-    };
-    this.setState({ text: '' });
-    this.props.playersignup('add', newplayer);
+    });
   }
 
-  removePlayer(player) {
+  _removePlayer(player) {
     this.props.playersignup('remove', player);
   }
 
@@ -50,7 +59,7 @@ export default class PlayerSignup extends React.Component {
                    value={this.state.text}
                    placeholder='     Enter name....'
                    onChangeText={(text) => this.setState({text})} />
-        <TouchableHighlight onPress={this.addPlayer}>
+        <TouchableHighlight onPress={this._addPlayer}>
           <Text style={styles.resumebutton}>Add</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={() => { this._togglePicker(); }}>
@@ -69,6 +78,8 @@ export default class PlayerSignup extends React.Component {
                   }}>
             <Picker.Item label={"Monarch Bay"} value={"Monarch Bay"} />
             <Picker.Item label={"Pruneridge"} value={"Pruneridge"} />
+            <Picker.Item label={'Las Positas'} value={'Las Positas'} />
+            <Picker.Item label={'Santa Teresa'} value={'Santa Teresa'} />
           </Picker>
         </Modal>
         <TouchableHighlight onPress={() => { this.props.playersignup('finish', this.state.course); }}>
@@ -76,7 +87,7 @@ export default class PlayerSignup extends React.Component {
         </TouchableHighlight>
         <FlatList data={this.props.players}
                   renderItem={(player) => <Player player={player}
-                                                  removePlayer={this.removePlayer} />} />
+                                                  removePlayer={this._removePlayer} />} />
         </Image>
       </View>
     );

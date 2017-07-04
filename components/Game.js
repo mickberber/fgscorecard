@@ -6,7 +6,7 @@ import PlayerSignup from './PlayerSignup';
 import GamePlayer from './GamePlayer';
 import CourseHeader from './CourseHeader';
 import FinishGame from './FinishGame';
-import { MonarchBay, Pruneridge } from './../courses/courses';
+import { MonarchBay, Pruneridge, LasPositas, SantaTeresa } from './../courses/courses';
 import { styles } from './../styles/App';
 
 export default class Game extends React.Component {
@@ -53,6 +53,12 @@ export default class Game extends React.Component {
             break;
           case 'Pruneridge':
             course = Pruneridge;
+            break;
+          case 'Las Positas':
+            course = LasPositas;
+            break;
+          case 'Santa Teresa':
+            course = SantaTeresa;
             break;
           default:
             course = MonarchBay;
