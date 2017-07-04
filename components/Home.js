@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Image, Text, TouchableHighlight, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { Link } from 'react-router-native';
 
 import { styles } from './../styles/App';

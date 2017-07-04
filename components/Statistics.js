@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, FlatList, AsyncStorage } from 'react-native';
+import { Text, View, AsyncStorage } from 'react-native';
 import { Link } from 'react-router-native';
 
 import { styles } from './../styles/App';

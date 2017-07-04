@@ -1,6 +1,5 @@
 import React from 'react';
-import { Alert, Image, Text, TouchableHighlight, View, TextInput, FlatList } from 'react-native';
-import { Link } from 'react-router-native';
+import { Alert, Text, TouchableHighlight, View } from 'react-native';
 
 import { styles } from './../styles/App';
 
@@ -18,14 +17,15 @@ class GamePlayer extends React.Component {
   }
 
   render() {
-    let totalscore = 0;
-    this.props.player.item.scores.forEach((score) => {
-      totalscore = totalscore + score;
-    });
+    const scores = this.props.player.item.scores;
+    const totalscore = scores.reduce((score, acc) => {
+      return acc + score;
+    }, 0);
     const currentscore = this.props.player.item.scores[this.props.currentHole - 1] || 0;
 
     return (
       <View style={styles.playerdisplayrow}>
+        {/*  TODO: refactor out these counters to a sepreate component */}
         <View style={styles.scoredisplayrow1}>
           <Text style={styles.gameplayername}>{this.props.player.item.name}</Text>
           <TouchableHighlight onPress={() => { this.incrementScore('+'); }}>
@@ -37,6 +37,7 @@ class GamePlayer extends React.Component {
           </TouchableHighlight>
           <Text style={styles.removebutton}>{totalscore}</Text>
         </View>
+        {/*  END TODO */}
         <View style={styles.scoredisplayrow2}>
           {this.props.player.item.scores.map((score, i) => {
             return (<Text key={i} style={styles.scorebox}>{score}</Text>);

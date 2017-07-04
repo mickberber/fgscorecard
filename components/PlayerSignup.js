@@ -10,7 +10,6 @@ import {
   TextInput,
   FlatList
 } from 'react-native';
-import { Link } from 'react-router-native';
 
 import Player from './Player';
 import { styles } from './../styles/App';
@@ -66,6 +65,7 @@ export default class PlayerSignup extends React.Component {
         <TouchableHighlight onPress={() => { this._togglePicker(); }}>
            <Text style={styles.resumebutton}>{this.state.course}</Text>
         </TouchableHighlight>
+        {/*  TODO: refactor modal into it's own component */}
         <Modal animationType={"slide"}
                transparent={false}
                visible={this.state.renderPicker}>
@@ -83,6 +83,7 @@ export default class PlayerSignup extends React.Component {
             <Picker.Item label={'Santa Teresa'} value={'Santa Teresa'} />
           </Picker>
         </Modal>
+        {/* END TODO */}
         <TouchableHighlight onPress={() => { this.props.playersignup('finish', this.state.course); }}>
           <Text style={styles.statisticsbutton}>Start Game</Text>
         </TouchableHighlight>

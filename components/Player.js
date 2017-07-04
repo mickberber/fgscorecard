@@ -1,6 +1,10 @@
 import React from 'react';
-import { Alert, Image, Text, TouchableHighlight, View, TextInput, FlatList } from 'react-native';
-import { Link } from 'react-router-native';
+import {
+  Image,
+  Text,
+  TouchableHighlight,
+  View
+} from 'react-native';
 
 import { styles } from './../styles/App';
 
