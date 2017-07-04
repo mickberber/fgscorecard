@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, AsyncStorage, FlatList } from 'react-native';
+import { Text, View, AsyncStorage, FlatList, TouchableHighlight, Dimensions } from 'react-native';
 import { Link } from 'react-router-native';
 
 import { styles } from './../../styles/App';
@@ -54,17 +54,33 @@ export default class Statistics extends React.Component {
   }
 
   render() {
+    let { height, width } = Dimensions.get('window');
     return (
-      <View style={styles.container}>
-        <Link to='/'>
-        <Text style={styles.newbutton}>Home</Text>
-      </Link>
+      <View style={{
+        height,
+        width,
+        alignItems: 'center',
+        justifyContent: 'center',
+       }}>
+      <Text style={styles.statsapptitle}> fgScorecard </Text>
       <FlatList data={this.state.games}
                 horizontal={false}
                 renderItem={(game) => {
-                  return <View style={{flex: 1}}>
-                    <Text style={styles.statstitle}>Course: {game.item.courseTitle}</Text>
+                  return <View style={{
+                    width: width - 4,
+                    borderBottomWidth: 1,
+                    borderBottomColor: 'black',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Text style={styles.statscoursetitle}>
+                      {game.item.courseTitle}
+                      <Link style={styles.statsdetailslink} to='/'>
+                        <Text style={styles.statsdetailsbutton}>Details</Text>
+                      </Link>
+                    </Text>
                     <FlatList data={game.item.players}
+                              style={{width: width - 100}}
                               horizontal={true}
                               renderItem={(player) => {
                                 let totalscore = player.item.scores.reduce((acc, score) => {
@@ -77,6 +93,9 @@ export default class Statistics extends React.Component {
                               }} />
                   </View>
                 }}/>
+        <Link to='/'>
+          <Text style={styles.newbutton}>Home</Text>
+        </Link>
       </View>
     );
   }
