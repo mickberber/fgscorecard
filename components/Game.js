@@ -6,7 +6,7 @@ import PlayerSignup from './PlayerSignup';
 import GamePlayer from './GamePlayer';
 import CourseHeader from './CourseHeader';
 import FinishGame from './FinishGame';
-import { MonarchBay } from './../courses/courses';
+import { MonarchBay, Pruneridge } from './../courses/courses';
 import { styles } from './../styles/App';
 
 export default class Game extends React.Component {
@@ -98,8 +98,6 @@ export default class Game extends React.Component {
       this.state.course.back : this.state.course.front;
 
     if (this.state.course.holes[this.state.currentHole - 1] === undefined) {
-      console.log('this.state.course.holes',this.state.course.holes)
-      console.log('this.state.currentHole',this.state.currentHole)
       return <FinishGame players={this.state.players}
                          totalYardage={this.state.course.total.totalYardage}
                          totalPar={this.state.course.total.par}

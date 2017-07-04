@@ -51,6 +51,7 @@ export const styles = StyleSheet.create({
   signupInput: {
     backgroundColor: 'white',
     margin: 50,
+    marginLeft: 125,
     height: 50,
     width: 250,
   },

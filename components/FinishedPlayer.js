@@ -21,7 +21,7 @@ class FinishedPlayer extends React.Component {
           <Text style={styles.playername}>{this.props.player.item.name}</Text>
           <Text style={styles.removebutton}>{totalscore}</Text>
         </View>
-        <View style={styles.scoredisplayrow2}>
+       <View style={styles.scoredisplayrow2}>
           {this.props.player.item.scores.map((score, i) => {
             return (<Text key={i} style={styles.scorebox}>{score}</Text>);
           })}

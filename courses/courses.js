@@ -105,3 +105,66 @@ export const MonarchBay = {
     },
   ],
 };
+
+export const Pruneridge = {
+  title: 'Pruneridge',
+  total: {
+    totalYardage: 1112,
+    par: 37,
+  },
+  front: {
+    totalYardage: 1027,
+    par: 33,
+  },
+  back: {
+    totalYardage: null,
+    par: null,
+  },
+  holes: [
+    {
+      'number': 1,
+      'yardage': 105,
+      'par': 4,
+    },
+    {
+      'number': 2,
+      'yardage': 95,
+      'par': 4,
+    },
+    {
+      'number': 3,
+      'yardage': 180,
+      'par': 5,
+    },
+    {
+      'number': 4,
+      'yardage': 185,
+      'par': 5,
+    },
+    {
+      'number': 5,
+      'yardage': 121,
+      'par': 4,
+    },
+    {
+      'number': 6,
+      'yardage': 73,
+      'par': 3,
+    },
+    {
+      'number': 7,
+      'yardage': 71,
+      'par': 3,
+    },
+    {
+      'number': 8,
+      'yardage': 117,
+      'par': 4,
+    },
+    {
+      'number': 9,
+      'yardage': 165,
+      'par': 5,
+    },
+  ],
+};
