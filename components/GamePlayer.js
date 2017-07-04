@@ -25,8 +25,8 @@ class GamePlayer extends React.Component {
     const currentscore = this.props.player.item.scores[this.props.currentHole - 1] || 0;
 
     return (
-      <View style={styles.playerrow}>
-        <View style={styles.playerrow}>
+      <View style={styles.playerdisplayrow}>
+        <View style={styles.scoredisplayrow1}>
           <Text style={styles.playername}>{this.props.player.item.name}</Text>
           <TouchableHighlight onPress={() => { this.incrementScore('+'); }}>
             <Text style={styles.removebutton}>+</Text>
@@ -37,10 +37,10 @@ class GamePlayer extends React.Component {
           </TouchableHighlight>
           <Text style={styles.removebutton}>{totalscore}</Text>
         </View>
-        <View style={styles.playerrow}>
-          {/* {this.props.player.item.scores.map((score) => {
-            return (<Text>{score}</Text>);
-          })} */}
+        <View style={styles.scoredisplayrow2}>
+          {this.props.player.item.scores.map((score) => {
+            return (<Text style={styles.scorebox}>{score}</Text>);
+          })}
         </View>
       </View>
     );

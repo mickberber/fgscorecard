@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  // HOME
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -46,6 +47,7 @@ export const styles = StyleSheet.create({
     lineHeight: 50,
     marginBottom: 15,
   },
+  // PLAYER SIGNUP
   signupInput: {
     backgroundColor: 'white',
     margin: 50,
@@ -73,4 +75,50 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 50,
   },
+  // GAME
+  coursetitle: {
+    fontWeight: 'bold',
+    marginTop: 20,
+    fontSize: 40,
+  },
+  coursedetailscontainer: {
+    flexDirection: 'row',
+    flex: 1,
+    marginTop: 20,
+  },
+  detailscolumn: {
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'center'
+  },
+  courseheader: {
+    fontWeight: 'bold',
+    marginTop: 5,
+    fontSize: 20,
+  },
+  courseyardpar: {
+    fontSize: 15,
+  },
+  // player in game display
+  playerdisplayrowtop: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  scoredisplayrow1: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  scoredisplayrow2: {
+    flexDirection: 'row',
+    flex: 2,
+  },
+  scorebox: {
+    fontWeight: 'bold',
+    height: 30,
+    width: 30,
+    textAlign: 'center',
+    lineHeight: 30,
+    borderColor: 'black',
+    borderWidth: 1,
+  }
 });
