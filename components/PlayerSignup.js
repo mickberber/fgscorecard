@@ -38,7 +38,7 @@ export default class PlayerSignup extends React.Component {
                source={require('./../assets/footgolf.jpg')}>
         <TextInput style={styles.signupInput}
                    value={this.state.text}
-                   placeholder='Enter name....'
+                   placeholder='     Enter name....'
                    onChangeText={(text) => this.setState({text})} />
         <TouchableHighlight onPress={this.addPlayer}>
           <Text style={styles.resumebutton}>Add</Text>

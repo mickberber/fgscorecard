@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 
 import { styles } from './../styles/App';
 
-export default class CourseHeader extends React.Component {
+export default class FinishGame extends React.Component {
   constructor(props) {
     super(props);
   }
