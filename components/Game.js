@@ -17,7 +17,8 @@ export default class Game extends React.Component {
       currentHole: null,
       players: [],
       totalPlayers: 0,
-      course: MonarchBay
+      course: MonarchBay,
+      courseTitle: 'Monarch Bay',
     }
 
     this._playersignup = this._playersignup.bind(this);
@@ -42,6 +43,7 @@ export default class Game extends React.Component {
       case 'finish':
         // FIX SHITTY NAMING AND BE ASHAMED OF YOURSELF
         let course = player;
+        let courseTitle = player;
         players = this.state.players.map((player) => {
           return Object.assign({}, player, {
             scores: player.scores.concat([0])
@@ -67,7 +69,8 @@ export default class Game extends React.Component {
         this.setState({
           currentHole: 1,
           players,
-          course
+          course,
+          courseTitle,
         });
         break;
       default:
@@ -118,7 +121,12 @@ export default class Game extends React.Component {
       this.state.course.back : this.state.course.front;
 
     if (this.state.course.holes[this.state.currentHole - 1] === undefined) {
+      const game = {
+        players: this.state.players,
+        courseTitle: this.state.courseTitle,
+      };
       return <FinishGame players={this.state.players}
+                         game={game}
                          totalYardage={this.state.course.total.totalYardage}
                          totalPar={this.state.course.total.par}
                          currentHole={currentHole}
