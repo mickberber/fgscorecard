@@ -8,11 +8,14 @@ import { styles } from './../../styles/App';
 export default class FinishGame extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props',props)
+    this.players = props.location.query ?
+      props.location.query.players : this.props.players;
+    this.courseTitle = props.location.query ?
+      props.location.query.courseTitle : this.props.courseTitle;
     this.state = {
       games: [],
       totalGames: null,
-      finished: false,
+      finished: props.location.query ? true : false,
     };
   }
 
@@ -52,7 +55,9 @@ export default class FinishGame extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <FlatList data={this.props.players}
+        <Text style={styles.statsapptitle}>fgScorecard</Text>
+        <Text style={styles.statscoursetitle}>{this.courseTitle}</Text>
+        <FlatList data={this.players}
                   renderItem={(player) => <FinishedPlayer player={player} />} />
         {!this.state.finished ? <TouchableHighlight onPress={() => { this._finishgame(); }}>
             <Text style={styles.resumebutton}>Save Game</Text>

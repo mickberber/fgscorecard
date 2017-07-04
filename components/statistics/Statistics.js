@@ -75,7 +75,15 @@ export default class Statistics extends React.Component {
                   }}>
                     <Text style={styles.statscoursetitle}>
                       {game.item.courseTitle}
-                      <Link style={styles.statsdetailslink} to='/'>
+                      <Link style={styles.statsdetailslink}
+                            to={{
+                              pathname: `/statistics/${game.index}`,
+                              query: {
+                                players: game.item.players,
+                                courseTitle: game.item.courseTitle, 
+                              }
+                            }}
+                            players={game.item.players}>
                         <Text style={styles.statsdetailsbutton}>Details</Text>
                       </Link>
                     </Text>

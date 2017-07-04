@@ -129,14 +129,7 @@ export default class Game extends React.Component {
         players: this.state.players,
         courseTitle: this.state.courseTitle,
       };
-        //  TODO: remove and just use this.state.course
-        //  totalYardage={this.state.course.total.totalYardage}
-        //  totalPar={this.state.course.total.par}
-        //  currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]}
-        //  coursehalf={coursehalf}
       return <FinishGame players={this.state.players}
-                         game={game}
-                         course={this.state.course}
                          currentHole={currentHole}
                        />
     }
