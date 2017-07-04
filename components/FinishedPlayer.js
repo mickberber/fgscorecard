@@ -1,6 +1,5 @@
 import React from 'react';
-import { Alert, Image, Text, TouchableHighlight, View, TextInput, FlatList } from 'react-native';
-import { Link } from 'react-router-native';
+import { Text, View } from 'react-native';
 
 import { styles } from './../styles/App';
 
@@ -10,10 +9,10 @@ class FinishedPlayer extends React.Component {
   }
 
   render() {
-    let totalscore = 0;
-    this.props.player.item.scores.forEach((score) => {
-      totalscore = totalscore + score;
-    });
+    const scores = this.props.player.item.scores;
+    const totalscore = scores.reduce((score, acc) => {
+      return acc + score;
+    }, 0);
 
     return (
       <View style={styles.playerdisplayrow}>
