@@ -4,6 +4,7 @@ import { Link } from 'react-router-native';
 
 import PlayerSignup from './PlayerSignup';
 import GamePlayer from './GamePlayer';
+import CourseHeader from './CourseHeader';
 import { MonarchBay } from './../courses/courses';
 import { styles } from './../styles/App';
 
@@ -15,6 +16,7 @@ export default class Game extends React.Component {
       currentHole: null,
       players: [],
       totalPlayers: 0,
+      course: MonarchBay
     }
 
     this._playersignup = this._playersignup.bind(this);
@@ -34,9 +36,7 @@ export default class Game extends React.Component {
         players = this.state.players.slice(0, player.key)
                                     .concat(this.state.players
                                     .slice(player.key + 1));
-        this.setState({
-          players,
-        });
+        this.setState({ players });
         break;
       case 'finish':
         players = this.state.players.map((player) => {
@@ -91,28 +91,23 @@ export default class Game extends React.Component {
                            playersignup={this._playersignup}
                            totalPlayers={this.state.totalPlayers} />
     }
+
+    if (this.state.currentHole === 19) {
+      return <FinishGame players={this.state.players} />
+    }
+
     const currentHole = this.state.currentHole;
     const coursehalf = (currentHole > 9) ?
-      MonarchBay.back : MonarchBay.front;
+      this.state.course.back : this.state.course.front;
 
     return (
       <View style={styles.container}>
-        <Text style={styles.coursetitle}>MonarchBay</Text>
-        <View style={styles.coursedetailscontainer}>
-          <View style={styles.detailscolumn}>
-            <Text style={styles.courseheader}>Course Totals</Text>
-            <Text style={styles.courseyardpar}>Total Yardage: {MonarchBay.total.totalYardage}</Text>
-            <Text style={styles.courseyardpar}>Par: {MonarchBay.total.par}</Text>
-            <Text style={styles.courseheader}>{(currentHole > 9) ? 'Back' : 'Front'} 9: Totals</Text>
-            <Text style={styles.courseyardpar}>Total Yardage: {coursehalf.totalYardage}</Text>
-            <Text style={styles.courseyardpar}>Par: {coursehalf.par}</Text>
-          </View>
-          <View style={styles.detailscolumn}>
-            <Text style={styles.courseheader}>Hole {this.state.currentHole} </Text>
-            <Text style={styles.courseyardpar}>Yardage: {MonarchBay.holes[this.state.currentHole - 1].yardage}</Text>
-            <Text style={styles.courseyardpar}>Par: {MonarchBay.holes[this.state.currentHole - 1].par}</Text>
-          </View>
-        </View>
+        <Text style={styles.coursetitle}>{this.state.course.title}</Text>
+        <CourseHeader totalYardage={this.state.course.total.totalYardage}
+                      totalPar={this.state.course.total.par}
+                      currentHole={currentHole}
+                      coursehalf={coursehalf}
+                      currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
         <TouchableHighlight onPress={() => { this._finishhole(); }}>
           <Text style={styles.resumebutton}>Finish Hole</Text>
         </TouchableHighlight>

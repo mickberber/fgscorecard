@@ -1,4 +1,5 @@
 export const MonarchBay = {
+  title: 'Monarch Bay',
   total: {
     totalYardage: 2133,
     par: 70,

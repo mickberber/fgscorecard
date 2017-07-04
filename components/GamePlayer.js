@@ -38,8 +38,8 @@ class GamePlayer extends React.Component {
           <Text style={styles.removebutton}>{totalscore}</Text>
         </View>
         <View style={styles.scoredisplayrow2}>
-          {this.props.player.item.scores.map((score) => {
-            return (<Text style={styles.scorebox}>{score}</Text>);
+          {this.props.player.item.scores.map((score, i) => {
+            return (<Text key={i} style={styles.scorebox}>{score}</Text>);
           })}
         </View>
       </View>

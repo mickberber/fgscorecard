@@ -103,6 +103,7 @@ export const styles = StyleSheet.create({
   playerdisplayrowtop: {
     flexDirection: 'row',
     flex: 1,
+    margin: 5,
   },
   scoredisplayrow1: {
     flexDirection: 'row',
