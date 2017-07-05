@@ -17,6 +17,15 @@ const Home = props => {
           <Link to='/statistics'>
             <Text style={styles.statisticsbutton}>Statistics</Text>
           </Link>
+          <Link style={styles.statisticsbutton}
+                to={{
+                  pathname: '/game',
+                  query: {
+                    loadgame: true,
+                  },
+                }}>
+            <Text style={styles.statsdetailsbutton}>Resume</Text>
+          </Link>
         </View>
       </Image>
     </View>
