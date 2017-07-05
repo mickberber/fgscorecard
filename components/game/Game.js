@@ -1,5 +1,6 @@
 import React from 'react';
-import { Alert, Text, Modal, TouchableHighlight, View, FlatList } from 'react-native';
+import { Alert, Text, Modal, AsyncStorage, TouchableHighlight, View, FlatList } from 'react-native';
+import { Redirect } from 'react-router-native';
 
 import PlayerSignup from './../signup/PlayerSignup';
 import FinishGame from './../finish/FinishGame';
@@ -31,6 +32,7 @@ export default class Game extends React.Component {
     this._pickCourse = this._pickCourse.bind(this);
     this._incrementscore = this._incrementscore.bind(this);
     this._toggleModal = this._toggleModal.bind(this);
+    this._savegame = this._savegame.bind(this);
     this._quitgame = this._quitgame.bind(this);
   }
 
@@ -125,18 +127,64 @@ export default class Game extends React.Component {
     });
   }
 
+  _savegame() {
+    (async () => {
+      const state = Object.assign({}, this.state, {
+        showModal: false,
+      });
+      try {
+        const val = await AsyncStorage.setItem('currentGame', JSON.stringify(this.state));
+        this.setState({
+          transition: true,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }
+
   _quitgame() {
-    this.setState({
-      currentHole: null,
-      players: [],
-      totalPlayers: 0,
-      course: MonarchBay,
-      courseTitle: 'Monarch Bay',
-      showModal: !this.state.showModal,
-    });
+    (async () => {
+      try {
+        const defaultstate = {
+          currentHole: null,
+          players: [],
+          totalPlayers: 0,
+          course: MonarchBay,
+          courseTitle: 'Monarch Bay',
+          showModal: false,
+        };
+        // Use to clear db
+        // const val = await AsyncStorage.setItem('games', JSON.stringify([]));
+        const val = await AsyncStorage.setItem('currentGame', JSON.stringify(defaultstate));
+        this.setState({
+          transition: true,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   };
 
+  componentWillMount() {
+    if(this.props.location && this.props.location.query &&  this.props.location.query.loadgame) {
+      (async () => {
+        try {
+          const gametoresume = await AsyncStorage.getItem('currentGame');
+          gametoresume = JSON.parse(gametoresume);
+          this.setState(gametoresume);
+        } catch (error) {
+          console.error(error);
+        }
+      })();
+    }
+  }
+
   render() {
+    if (this.state.transition) {
+      return <Redirect to='/' />
+    }
+
     if (this.state.currentHole === null) {
       return <PlayerSignup players={this.state.players}
                            playersignup={this._playersignup}
@@ -179,7 +227,7 @@ export default class Game extends React.Component {
                                                         incrementscore={this._incrementscore} />} />
         </View>
         <TouchableHighlight onPress={() => { this._toggleModal(); }}>
-          <Text style={styles.resumebutton}>Quit Game</Text>
+          <Text style={styles.resumebutton}>Save/Quit</Text>
         </TouchableHighlight>
         <Modal animationType={"slide"}
                transparent={false}
@@ -192,6 +240,9 @@ export default class Game extends React.Component {
                }} >
                  <TouchableHighlight onPress={() => { this._toggleModal(); }}>
                    <Text style={styles.newbutton}>Resume</Text>
+                 </TouchableHighlight>
+                 <TouchableHighlight onPress={() => { this._savegame(); }}>
+                   <Text style={styles.newbutton}>Save</Text>
                  </TouchableHighlight>
                  <TouchableHighlight onPress={() => { this._quitgame(); }}>
                    <Text style={styles.quitbutton}>Quit</Text>

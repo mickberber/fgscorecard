@@ -14,9 +14,21 @@ const Home = props => {
           <Link to='/game'>
               <Text style={styles.newbutton}>New</Text>
           </Link>
+          <Link
+                to={{
+                  pathname: '/game',
+                  query: {
+                    loadgame: true,
+                  },
+                }}>
+            <Text style={styles.statisticsbutton}>Resume</Text>
+          </Link>
           <Link to='/statistics'>
             <Text style={styles.statisticsbutton}>Statistics</Text>
           </Link>
+          {/* <Link to='/players'>
+            <Text style={styles.statisticsbutton}>Players</Text>
+          </Link> */}
         </View>
       </Image>
     </View>
