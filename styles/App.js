@@ -121,6 +121,27 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 50,
   },
+  plusbutton: {
+    backgroundColor: '#009e0a',
+    fontWeight: 'bold',
+    color: 'white',
+    height: 50,
+    width: 50,
+    textAlign: 'center',
+    lineHeight: 50,
+    marginRight: 5,
+  },
+  minusbutton: {
+    backgroundColor: '#cc2828',
+    fontWeight: 'bold',
+    color: 'white',
+    height: 50,
+    width: 50,
+    textAlign: 'center',
+    lineHeight: 50,
+    marginLeft: 5,
+    marginRight: 5,
+  },
   // GAME
   coursetitle: {
     fontWeight: 'bold',

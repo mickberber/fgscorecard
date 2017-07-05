@@ -90,8 +90,11 @@ export default class Game extends React.Component {
       } else {
         const key = player.scores[this.state.currentHole - 1].key;
         const oldscore = player.scores[this.state.currentHole - 1].score;
-        const newscore = (sign === '+') ?
+        let newscore = (sign === '+') ?
           oldscore + 1 : oldscore - 1;
+        if (newscore < 0) {
+          newscore = 0;
+        }
         return Object.assign({}, player, {
           scores: player.scores.slice(0, this.state.currentHole - 1)
                                .concat([{key, score: newscore}])

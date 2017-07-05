@@ -29,11 +29,11 @@ class GamePlayer extends React.Component {
         <View style={styles.scoredisplayrow1}>
           <Text style={styles.gameplayername}>{this.props.player.item.name}</Text>
           <TouchableHighlight onPress={() => { this.incrementScore('+'); }}>
-            <Text style={styles.removebutton}>+</Text>
+            <Text style={styles.plusbutton}>+</Text>
           </TouchableHighlight>
           <Text style={styles.removebutton}>{currentscore}</Text>
           <TouchableHighlight onPress={() => { this.incrementScore('-'); }}>
-            <Text style={styles.removebutton}>-</Text>
+            <Text style={styles.minusbutton}>-</Text>
           </TouchableHighlight>
           <Text style={styles.removebutton}>{totalscore}</Text>
         </View>
