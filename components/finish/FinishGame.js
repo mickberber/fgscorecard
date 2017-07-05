@@ -11,19 +11,42 @@ import {
   SantaTeresa
 } from './../../courses/courses';
 
+const keyExtractor = (item, index) => {
+  return item.key;
+}
+
+const keyExtractorHole = (item, index) => {
+  return item.number;
+}
+
 export default class FinishGame extends React.Component {
   constructor(props) {
     super(props);
     this.players = props.location ?
-      props.location.query.players : this.props.players;
+      props.location.query.players : props.players;
     this.courseTitle = props.location ?
-      props.location.query.courseTitle : this.props.courseTitle;
-    this.course = MonarchBay;
+      props.location.query.courseTitle : props.game.courseTitle;
+    this.course = this._pickCourse(this.courseTitle);
     this.state = {
       games: [],
       totalGames: null,
       finished: props.location ? true : false,
     };
+  }
+
+  _pickCourse(course) {
+    switch(course) {
+      case 'Monarch Bay':
+        return MonarchBay;
+      case 'Pruneridge':
+        return Pruneridge;
+      case 'Las Positas':
+        return LasPositas;
+      case 'Santa Teresa':
+        return SantaTeresa;
+      default:
+        return MonarchBay;
+    }
   }
 
   _finishgame() {
@@ -66,8 +89,10 @@ export default class FinishGame extends React.Component {
         <Text style={styles.statscoursetitle}>{this.courseTitle}</Text>
         <FlatList data={this.course.holes}
                   horizontal={true}
+                  keyExtractor={keyExtractorHole}
                   renderItem={(hole) => <Text style={styles.scorebox}>{hole.item.par}</Text>} />
         <FlatList data={this.players}
+                  keyExtractor={keyExtractor}
                   renderItem={(player) => <FinishedPlayer player={player} />} />
         {!this.state.finished ? <TouchableHighlight onPress={() => { this._finishgame(); }}>
             <Text style={styles.resumebutton}>Save Game</Text>

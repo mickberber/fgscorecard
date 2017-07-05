@@ -3,6 +3,8 @@ import { Text, View, FlatList } from 'react-native';
 
 import { styles } from './../../styles/App';
 
+const keyExtractor = (item, index) => item.key;
+
 const FinishedPlayer = props => {
   const scores = props.player.item.scores.slice();
   const totalscore = scores.reduce((acc, score, index) => {
@@ -18,6 +20,7 @@ const FinishedPlayer = props => {
      <View style={styles.scoredisplayrow2}>
        <FlatList data={scores}
                  horizontal={true}
+                 keyExtractor={keyExtractor}
                  renderItem={(score) => {
                    return <Text style={styles.scorebox}>{score.item.score}</Text>
                  }} />

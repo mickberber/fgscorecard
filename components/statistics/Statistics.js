@@ -4,6 +4,15 @@ import { Link } from 'react-router-native';
 
 import { styles } from './../../styles/App';
 
+
+const keyExtractor = (item, index) => {
+  return item.key;
+}
+
+const keyExtractorGames = (item, index) => {
+  return index;
+}
+
 export default class Statistics extends React.Component {
   constructor(props) {
     super(props);
@@ -65,6 +74,7 @@ export default class Statistics extends React.Component {
       <Text style={styles.statsapptitle}> fgScorecard </Text>
       <FlatList data={this.state.games}
                 horizontal={false}
+                keyExtractor={keyExtractorGames}
                 renderItem={(game) => {
                   return <View style={{
                     width: width - 4,
@@ -80,7 +90,7 @@ export default class Statistics extends React.Component {
                               pathname: `/statistics/${game.index}`,
                               query: {
                                 players: game.item.players,
-                                courseTitle: game.item.courseTitle, 
+                                courseTitle: game.item.courseTitle,
                               }
                             }}
                             players={game.item.players}>
@@ -90,6 +100,7 @@ export default class Statistics extends React.Component {
                     <FlatList data={game.item.players}
                               style={{width: width - 100}}
                               horizontal={true}
+                              keyExtractor={keyExtractor}
                               renderItem={(player) => {
                                 let totalscore = player.item.scores.reduce((acc, score) => {
                                   return acc + score.score;

@@ -150,7 +150,7 @@ export default class Game extends React.Component {
         courseTitle: this.state.courseTitle,
       };
       return <FinishGame players={this.state.players}
-                         currentHole={currentHole}
+                         game={game}
                        />
     }
 
