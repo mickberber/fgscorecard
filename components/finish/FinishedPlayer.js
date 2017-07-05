@@ -10,7 +10,7 @@ const FinishedPlayer = props => {
   }, 0);
 
   return (
-    <View style={styles.playerdisplayrow}>
+    <View style={styles.playerdisplayrowtop}>
       <View style={styles.scoredisplayrow1}>
         <Text style={styles.playername}>{props.player.item.name}</Text>
         <Text style={styles.removebutton}>{totalscore}</Text>

@@ -11,8 +11,15 @@ export const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     fontFamily: 'Baskerville',
-    fontSize: 42,
+    fontSize: 65,
     marginBottom: 10,
+    textShadowColor: 'white',
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    textShadowRadius: 10,
+    backgroundColor: 'transparent',
   },
   image: {
     flex: 1,
@@ -42,6 +49,16 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 50,
     marginBottom: 20,
+  },
+  finishholebutton: {
+    backgroundColor: '#009e0a',
+    fontWeight: 'bold',
+    color: 'white',
+    height: 50,
+    width: 250,
+    textAlign: 'center',
+    lineHeight: 50,
+    marginTop: 30,
   },
   quitbutton: {
     backgroundColor: '#cc2828',
@@ -108,7 +125,9 @@ export const styles = StyleSheet.create({
   coursetitle: {
     fontWeight: 'bold',
     marginTop: 20,
+    marginBottom: -10,
     fontSize: 40,
+    fontFamily: 'Baskerville',
   },
   coursedetailscontainer: {
     flexDirection: 'row',
@@ -130,8 +149,6 @@ export const styles = StyleSheet.create({
   },
   // player in game display
   playerdisplayrowtop: {
-    flexDirection: 'row',
-    flex: 1,
     margin: 5,
   },
   gameplayername: {
@@ -145,6 +162,7 @@ export const styles = StyleSheet.create({
   scoredisplayrow1: {
     flexDirection: 'row',
     flex: 1,
+    marginBottom: 5,
   },
   scoredisplayrow2: {
     flexDirection: 'row',
@@ -173,13 +191,28 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 5,
     height: 50,
+    textShadowColor: 'white',
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    textShadowRadius: 10,
+    backgroundColor: 'transparent',
   },
   statscoursetitle: {
+    fontFamily: 'Baskerville',
     fontWeight: 'bold',
     margin: 15,
     fontSize: 18,
     height: 30,
     lineHeight: 40,
+    textShadowColor: 'white',
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    textShadowRadius: 10,
+    backgroundColor: 'transparent',
   },
   statsdetailslink: {
     height: 30,

@@ -56,6 +56,7 @@ export default class PlayerSignup extends React.Component {
       <View style={styles.container}>
         <Image style={styles.image}
                source={require('./../../assets/footgolf.jpg')}>
+           <Text style={styles.statsapptitle}> fgScorecard </Text>
            <Text style={styles.pickcourse}>Pick course: </Text>
            <TouchableHighlight onPress={() => { this._togglePicker(); }}>
               <Text style={styles.statisticsbutton}>{this.state.course}</Text>

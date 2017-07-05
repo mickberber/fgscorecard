@@ -14,15 +14,15 @@ import {
 export default class FinishGame extends React.Component {
   constructor(props) {
     super(props);
-    this.players = props.location.query ?
+    this.players = props.location ?
       props.location.query.players : this.props.players;
-    this.courseTitle = props.location.query ?
+    this.courseTitle = props.location ?
       props.location.query.courseTitle : this.props.courseTitle;
     this.course = MonarchBay;
     this.state = {
       games: [],
       totalGames: null,
-      finished: props.location.query ? true : false,
+      finished: props.location ? true : false,
     };
   }
 

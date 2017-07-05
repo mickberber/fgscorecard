@@ -167,7 +167,7 @@ export default class Game extends React.Component {
                         currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
         </View>
         <TouchableHighlight onPress={() => { this._finishhole(); }}>
-          <Text style={styles.resumebutton}>Finish Hole</Text>
+          <Text style={styles.finishholebutton}>Finish Hole</Text>
         </TouchableHighlight>
         <View style={{flex: 2}}>
           <FlatList data={this.state.players}

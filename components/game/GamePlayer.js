@@ -24,7 +24,7 @@ class GamePlayer extends React.Component {
     const currentscore = scores[this.props.currentHole - 1].score || 0;
 
     return (
-      <View style={styles.playerdisplayrow}>
+      <View style={styles.playerdisplayrowtop}>
         {/*  TODO: refactor out these counters to a sepreate component */}
         <View style={styles.scoredisplayrow1}>
           <Text style={styles.gameplayername}>{this.props.player.item.name}</Text>
