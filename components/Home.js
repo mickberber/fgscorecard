@@ -14,9 +14,6 @@ const Home = props => {
           <Link to='/game'>
               <Text style={styles.newbutton}>New</Text>
           </Link>
-          <Link to='/statistics'>
-            <Text style={styles.statisticsbutton}>Statistics</Text>
-          </Link>
           <Link
                 to={{
                   pathname: '/game',
@@ -25,6 +22,9 @@ const Home = props => {
                   },
                 }}>
             <Text style={styles.statisticsbutton}>Resume</Text>
+          </Link>
+          <Link to='/statistics'>
+            <Text style={styles.statisticsbutton}>Statistics</Text>
           </Link>
         </View>
       </Image>

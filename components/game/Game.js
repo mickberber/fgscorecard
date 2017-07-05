@@ -157,7 +157,9 @@ export default class Game extends React.Component {
         // Use to clear db
         // const val = await AsyncStorage.setItem('games', JSON.stringify([]));
         const val = await AsyncStorage.setItem('currentGame', JSON.stringify(defaultstate));
-        this.setState(defaultstate);
+        this.setState({
+          transition: true,
+        });
       } catch (error) {
         console.error(error);
       }
