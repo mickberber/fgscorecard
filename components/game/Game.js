@@ -1,5 +1,6 @@
 import React from 'react';
 import { Alert, Text, Modal, AsyncStorage, TouchableHighlight, View, FlatList } from 'react-native';
+import { Redirect } from 'react-router-native';
 
 import PlayerSignup from './../signup/PlayerSignup';
 import FinishGame from './../finish/FinishGame';
@@ -128,8 +129,14 @@ export default class Game extends React.Component {
 
   _savegame() {
     (async () => {
+      const state = Object.assign({}, this.state, {
+        showModal: false,
+      });
       try {
         const val = await AsyncStorage.setItem('currentGame', JSON.stringify(this.state));
+        this.setState({
+          transition: true,
+        });
       } catch (error) {
         console.error(error);
       }
@@ -172,6 +179,10 @@ export default class Game extends React.Component {
   }
 
   render() {
+    if (this.state.transition) {
+      return <Redirect to='/' />
+    }
+
     if (this.state.currentHole === null) {
       return <PlayerSignup players={this.state.players}
                            playersignup={this._playersignup}
