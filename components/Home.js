@@ -35,17 +35,18 @@ class Home extends React.Component {
              source={require('./../assets/footgolf.jpg')}>
         <Text style={styles.apptitle}> fgScorecard </Text>
         <View style={styles.buttonscontainer}>
-          {this.state.showNewButton ? (<Link to='/game'>
-              <Text style={styles.newbutton}>New</Text>
+          {this.state.showNewButton ? (<Link to='/game' style={styles.link}>
+              <Text style={styles.button}>new game</Text>
           </Link>) : (<Link to={{
                                   pathname: '/game',
                                   query: {
                                     loadgame: true,
-                                  }}}>
-            <Text style={styles.statisticsbutton}>Resume</Text>
+                                  }}}
+                            style={styles.link}>
+            <Text style={styles.resumebutton}>resume</Text>
           </Link>) }
-          <Link to='/statistics'>
-            <Text style={styles.statisticsbutton}>Statistics</Text>
+          <Link to='/statistics' style={styles.link}>
+            <Text style={styles.resumebutton}>statistics</Text>
           </Link>
           {/* <Link to='/players'>
             <Text style={styles.statisticsbutton}>Players</Text>

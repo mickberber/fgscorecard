@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, AsyncStorage, FlatList, TouchableHighlight, Dimensions } from 'react-native';
+import { Text, View, AsyncStorage, FlatList, TouchableHighlight, Image, Dimensions } from 'react-native';
 import { Link } from 'react-router-native';
 
 import { styles } from './../../styles/App';
@@ -71,50 +71,53 @@ export default class Statistics extends React.Component {
         alignItems: 'center',
         justifyContent: 'center',
        }}>
-      <Text style={styles.statsapptitle}> fgScorecard </Text>
-      <FlatList data={this.state.games}
-                horizontal={false}
-                keyExtractor={keyExtractorGames}
-                renderItem={(game) => {
-                  return <View style={{
-                    width: width - 4,
-                    borderBottomWidth: 1,
-                    borderBottomColor: 'black',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                    <Text style={styles.statscoursetitle}>
-                      {game.item.courseTitle}
-                      <Link style={styles.statsdetailslink}
-                            to={{
-                              pathname: `/statistics/${game.index}`,
-                              query: {
-                                players: game.item.players,
-                                courseTitle: game.item.courseTitle,
-                              }
-                            }}
-                            players={game.item.players}>
-                        <Text style={styles.statsdetailsbutton}>Details</Text>
-                      </Link>
-                    </Text>
-                    <FlatList data={game.item.players}
-                              style={{width: width - 100}}
-                              horizontal={true}
-                              keyExtractor={keyExtractor}
-                              renderItem={(player) => {
-                                let totalscore = player.item.scores.reduce((acc, score) => {
-                                  return acc + score.score;
-                                }, 0);
-                                return <View style={styles.statsplayercontainer}>
-                                  <Text style={styles.statsname}>{player.item.name}</Text>
-                                  <Text>{totalscore}</Text>
-                                </View>
-                              }} />
-                  </View>
-                }}/>
-        <Link to='/'>
-          <Text style={styles.newbutton}>Home</Text>
-        </Link>
+       <Image style={styles.image}
+              source={require('./../../assets/footgolf.jpg')}>
+        <Text style={styles.statsapptitle}> fgScorecard </Text>
+        <FlatList data={this.state.games}
+                  horizontal={false}
+                  keyExtractor={keyExtractorGames}
+                  renderItem={(game) => {
+                    return <View style={{
+                      width: width - 4,
+                      borderBottomWidth: 1,
+                      borderBottomColor: 'black',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                      <Text style={styles.statscoursetitle}>
+                        {game.item.courseTitle}
+                        <Link style={styles.statsdetailslink}
+                              to={{
+                                pathname: `/statistics/${game.index}`,
+                                query: {
+                                  players: game.item.players,
+                                  courseTitle: game.item.courseTitle,
+                                }
+                              }}
+                              players={game.item.players}>
+                          <Text style={styles.statsdetailsbutton}>Details</Text>
+                        </Link>
+                      </Text>
+                      <FlatList data={game.item.players}
+                                style={{width: width - 100, backgroundColor: 'rgba(52, 52, 52, 0.9)',}}
+                                horizontal={true}
+                                keyExtractor={keyExtractor}
+                                renderItem={(player) => {
+                                  let totalscore = player.item.scores.reduce((acc, score) => {
+                                    return acc + score.score;
+                                  }, 0);
+                                  return <View style={styles.statsplayercontainer}>
+                                    <Text style={styles.statsname}>{player.item.name}</Text>
+                                    <Text style={{backgroundColor: 'transparent', color: 'white'}}>{totalscore}</Text>
+                                  </View>
+                                }} />
+                    </View>
+                  }}/>
+          <Link to='/' style={styles.link}>
+            <Text style={styles.button}>Home</Text>
+          </Link>
+        </Image>
       </View>
     );
   }

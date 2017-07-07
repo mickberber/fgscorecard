@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, FlatList, AsyncStorage, TouchableHighlight } from 'react-native';
+import { Image, Text, View, FlatList, AsyncStorage, TouchableHighlight } from 'react-native';
 import { Link } from 'react-router-native';
 
 import FinishedPlayer from './FinishedPlayer';
@@ -85,21 +85,24 @@ export default class FinishGame extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.statsapptitle}>fgScorecard</Text>
-        <Text style={styles.statscoursetitle}>{this.courseTitle}</Text>
-        <FlatList data={this.course.holes}
-                  horizontal={true}
-                  keyExtractor={keyExtractorHole}
-                  renderItem={(hole) => <Text style={styles.scorebox}>{hole.item.par}</Text>} />
-        <FlatList data={this.players}
-                  keyExtractor={keyExtractor}
-                  renderItem={(player) => <FinishedPlayer player={player} />} />
-        {!this.state.finished ? <TouchableHighlight onPress={() => { this._finishgame(); }}>
-            <Text style={styles.resumebutton}>Save Game</Text>
-          </TouchableHighlight> : null}
-        {this.state.finished ? <Link to='/statistics'>
-          <Text style={styles.statisticsbutton}>Statistics</Text>
-        </Link> : null}
+        <Image style={styles.image}
+               source={require('./../../assets/footgolf.jpg')}>
+          <Text style={styles.statsapptitle}>fgScorecard</Text>
+          <Text style={styles.statscoursetitle}>{this.courseTitle}</Text>
+          <FlatList data={this.course.holes}
+                    horizontal={true}
+                    keyExtractor={keyExtractorHole}
+                    renderItem={(hole) => <Text style={styles.scorebox}>{hole.item.par}</Text>} />
+          <FlatList data={this.players}
+                    keyExtractor={keyExtractor}
+                    renderItem={(player) => <FinishedPlayer player={player} />} />
+          {!this.state.finished ? <TouchableHighlight style={styles.link} onPress={() => { this._finishgame(); }}>
+              <Text style={styles.resumebutton}>Save Game</Text>
+            </TouchableHighlight> : null}
+          {this.state.finished ? <Link to='/statistics' style={styles.link}>
+            <Text style={styles.resumebutton}>Statistics</Text>
+          </Link> : null}
+        </Image>
       </View>
     );
   }
