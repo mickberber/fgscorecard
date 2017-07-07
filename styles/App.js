@@ -66,15 +66,25 @@ export const styles = StyleSheet.create({
     lineHeight: 50,
     marginBottom: 20,
   },
-  finishholebutton: {
+  finishholelink: {
     backgroundColor: '#009e0a',
-    fontWeight: 'bold',
-    color: 'white',
     height: 50,
     width: 250,
+    marginTop: 10,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+  },
+  finishholebutton: {
+    fontWeight: 'bold',
+    color: 'white',
     textAlign: 'center',
     lineHeight: 50,
-    marginTop: 30,
   },
   quitbutton: {
     backgroundColor: '#cc2828',
@@ -173,25 +183,52 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: -10,
     fontSize: 40,
+    alignItems: 'center',
+    alignContent: 'center',
     fontFamily: 'Baskerville',
+    backgroundColor: 'transparent',
+    textShadowColor: 'white',
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    textShadowRadius: 10,
   },
   coursedetailscontainer: {
-    flexDirection: 'row',
     flex: 1,
+    backgroundColor: 'rgba(52, 52, 52, 0.5)',
+    flexDirection: 'row',
+    height: 750,
+    width: 350,
     marginTop: 20,
   },
   detailscolumn: {
-    flexDirection: 'column',
     flex: 1,
-    alignItems: 'center'
+    flexDirection: 'column',
+    alignItems: 'center',
+    alignContent: 'center',
   },
   courseheader: {
     fontWeight: 'bold',
+    color: 'white',
     marginTop: 5,
     fontSize: 20,
+    textShadowColor: 'black',
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    textShadowRadius: 10,
   },
   courseyardpar: {
-    fontSize: 15,
+    color: 'white',
+    fontSize: 10,
+    textShadowColor: 'black',
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    textShadowRadius: 10,
   },
   // player in game display
   playerdisplayrowtop: {
@@ -200,12 +237,14 @@ export const styles = StyleSheet.create({
   gameplayername: {
     width: 150,
     height: 50,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(52, 52, 52, 0.5)',
+    color: 'white',
     fontSize: 20,
     lineHeight: 50,
     textAlign: 'center',
   },
   scoredisplayrow1: {
+    backgroundColor: 'rgba(52, 52, 52, 0.5)',
     flexDirection: 'row',
     flex: 1,
     marginBottom: 5,
@@ -265,6 +304,13 @@ export const styles = StyleSheet.create({
     width: 110,
     backgroundColor: '#2b6cdb',
     marginLeft: 30,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
   },
   statsdetailsbutton: {
     marginLeft: 25,

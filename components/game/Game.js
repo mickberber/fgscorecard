@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Text, Modal, AsyncStorage, TouchableHighlight, View, FlatList } from 'react-native';
+import { Image, Alert, Text, Modal, AsyncStorage, TouchableHighlight, View, FlatList } from 'react-native';
 import { Redirect } from 'react-router-native';
 
 import PlayerSignup from './../signup/PlayerSignup';
@@ -208,47 +208,50 @@ export default class Game extends React.Component {
     /* TODO: remove course related and just use this.state.course */
     return (
       <View style={styles.container}>
-        <View style={{flex: 1}}>
-          <Text style={styles.coursetitle}>{this.state.course.title}</Text>
-          <CourseHeader totalYardage={this.state.course.total.totalYardage}
-                        totalPar={this.state.course.total.par}
-                        totalHoles={this.state.course.holes.length}
-                        currentHole={currentHole}
-                        coursehalf={coursehalf}
-                        currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
-        </View>
-        <TouchableHighlight style={styles.link} onPress={() => { this._finishhole(); }}>
-          <Text style={styles.finishholebutton}>Finish Hole</Text>
-        </TouchableHighlight>
-        <View style={{flex: 2}}>
-          <FlatList data={this.state.players}
-                    renderItem={(player) => <GamePlayer player={player}
-                                                        currentHole={this.state.currentHole}
-                                                        incrementscore={this._incrementscore} />} />
-        </View>
-        <TouchableHighlight style={styles.link} onPress={() => { this._toggleModal(); }}>
-          <Text style={styles.button}>Save/Quit</Text>
-        </TouchableHighlight>
-        <Modal animationType={"slide"}
-               transparent={false}
-               visible={this.state.showModal}>
-               <View style={{
-                 flex: 1,
-                 justifyContent: 'center',
-                 alignItems: 'center',
-                 backgroundColor: 'rgba(52, 52, 52, 0.5)',
-               }} >
-                 <TouchableHighlight style={styles.link} onPress={() => { this._toggleModal(); }}>
-                   <Text style={styles.button}>Resume</Text>
-                 </TouchableHighlight>
-                 <TouchableHighlight style={styles.link} onPress={() => { this._savegame(); }}>
-                   <Text style={styles.button}>Save</Text>
-                 </TouchableHighlight>
-                 <TouchableHighlight style={styles.link} onPress={() => { this._quitgame(); }}>
-                   <Text style={styles.quitbutton}>Quit</Text>
-                 </TouchableHighlight>
-               </View>
-        </Modal>
+        <Image style={styles.image}
+               source={require('./../../assets/footgolf.jpg')}>
+          <View style={{flex: 1}}>
+            <Text style={styles.coursetitle}>{this.state.course.title}</Text>
+            <CourseHeader totalYardage={this.state.course.total.totalYardage}
+                          totalPar={this.state.course.total.par}
+                          totalHoles={this.state.course.holes.length}
+                          currentHole={currentHole}
+                          coursehalf={coursehalf}
+                          currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
+          </View>
+          <TouchableHighlight style={styles.finishholelink} onPress={() => { this._finishhole(); }}>
+            <Text style={styles.finishholebutton}>Finish Hole</Text>
+          </TouchableHighlight>
+          <View style={{flex: 2}}>
+            <FlatList data={this.state.players}
+                      renderItem={(player) => <GamePlayer player={player}
+                                                          currentHole={this.state.currentHole}
+                                                          incrementscore={this._incrementscore} />} />
+          </View>
+          <TouchableHighlight style={styles.link} onPress={() => { this._toggleModal(); }}>
+            <Text style={styles.button}>Save/Quit</Text>
+          </TouchableHighlight>
+          <Modal animationType={"slide"}
+                 transparent={false}
+                 visible={this.state.showModal}>
+                 <View style={{
+                   flex: 1,
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   backgroundColor: 'rgba(52, 52, 52, 0.5)',
+                 }} >
+                   <TouchableHighlight style={styles.link} onPress={() => { this._toggleModal(); }}>
+                     <Text style={styles.button}>Resume</Text>
+                   </TouchableHighlight>
+                   <TouchableHighlight style={styles.link} onPress={() => { this._savegame(); }}>
+                     <Text style={styles.button}>Save</Text>
+                   </TouchableHighlight>
+                   <TouchableHighlight style={styles.link} onPress={() => { this._quitgame(); }}>
+                     <Text style={styles.quitbutton}>Quit</Text>
+                   </TouchableHighlight>
+                 </View>
+          </Modal>
+        </Image>
       </View>
     );
   }
