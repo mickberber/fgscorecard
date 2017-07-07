@@ -58,7 +58,7 @@ export default class PlayerSignup extends React.Component {
                source={require('./../../assets/footgolf.jpg')}>
            <Text style={styles.statsapptitle}> fgScorecard </Text>
            <Text style={styles.pickcourse}>Pick course: </Text>
-           <TouchableHighlight onPress={() => { this._togglePicker(); }}>
+           <TouchableHighlight style={styles.link} onPress={() => { this._togglePicker(); }}>
               <Text style={styles.statisticsbutton}>{this.state.course}</Text>
            </TouchableHighlight>
            {/*  TODO: refactor modal into it's own component */}
@@ -84,16 +84,16 @@ export default class PlayerSignup extends React.Component {
                      value={this.state.text}
                      placeholder='     Enter name....'
                      onChangeText={(text) => this.setState({text})} />
-          <TouchableHighlight onPress={this._addPlayer}>
-            <Text style={styles.statisticsbutton}>Add Player</Text>
+          <TouchableHighlight style={styles.link} onPress={this._addPlayer}>
+            <Text style={styles.resumebutton}>Add Player</Text>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => { this.props.playersignup('finish', this.state.course); }}>
-            <Text style={styles.statisticsbutton}>Start Game</Text>
+          <TouchableHighlight style={styles.link} onPress={() => { this.props.playersignup('finish', this.state.course); }}>
+            <Text style={styles.resumebutton}>Start Game</Text>
           </TouchableHighlight>
           <FlatList data={this.props.players}
                     renderItem={(player) => <Player player={player}
                                                     removePlayer={this._removePlayer} />} />
-          <Link to='/'>
+          <Link to='/' style={styles.link}>
             <Text style={styles.newbutton}>Home</Text>
           </Link>
         </Image>

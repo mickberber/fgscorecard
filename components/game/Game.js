@@ -217,7 +217,7 @@ export default class Game extends React.Component {
                         coursehalf={coursehalf}
                         currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
         </View>
-        <TouchableHighlight onPress={() => { this._finishhole(); }}>
+        <TouchableHighlight style={styles.link} onPress={() => { this._finishhole(); }}>
           <Text style={styles.finishholebutton}>Finish Hole</Text>
         </TouchableHighlight>
         <View style={{flex: 2}}>
@@ -226,8 +226,8 @@ export default class Game extends React.Component {
                                                         currentHole={this.state.currentHole}
                                                         incrementscore={this._incrementscore} />} />
         </View>
-        <TouchableHighlight onPress={() => { this._toggleModal(); }}>
-          <Text style={styles.resumebutton}>Save/Quit</Text>
+        <TouchableHighlight style={styles.link} onPress={() => { this._toggleModal(); }}>
+          <Text style={styles.button}>Save/Quit</Text>
         </TouchableHighlight>
         <Modal animationType={"slide"}
                transparent={false}
@@ -236,15 +236,15 @@ export default class Game extends React.Component {
                  flex: 1,
                  justifyContent: 'center',
                  alignItems: 'center',
-                 backgroundColor: 'grey'
+                 backgroundColor: 'rgba(52, 52, 52, 0.5)',
                }} >
-                 <TouchableHighlight onPress={() => { this._toggleModal(); }}>
-                   <Text style={styles.newbutton}>Resume</Text>
+                 <TouchableHighlight style={styles.link} onPress={() => { this._toggleModal(); }}>
+                   <Text style={styles.button}>Resume</Text>
                  </TouchableHighlight>
-                 <TouchableHighlight onPress={() => { this._savegame(); }}>
-                   <Text style={styles.newbutton}>Save</Text>
+                 <TouchableHighlight style={styles.link} onPress={() => { this._savegame(); }}>
+                   <Text style={styles.button}>Save</Text>
                  </TouchableHighlight>
-                 <TouchableHighlight onPress={() => { this._quitgame(); }}>
+                 <TouchableHighlight style={styles.link} onPress={() => { this._quitgame(); }}>
                    <Text style={styles.quitbutton}>Quit</Text>
                  </TouchableHighlight>
                </View>

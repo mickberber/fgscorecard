@@ -100,7 +100,7 @@ export default class Statistics extends React.Component {
                         </Link>
                       </Text>
                       <FlatList data={game.item.players}
-                                style={{width: width - 100, backgroundColor: 'rgba(52, 52, 52, 0.9)',}}
+                                style={{width: width - 100, backgroundColor: 'rgba(52, 52, 52, 0.5)',}}
                                 horizontal={true}
                                 keyExtractor={keyExtractor}
                                 renderItem={(player) => {
