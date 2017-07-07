@@ -12,12 +12,12 @@ const FinishedPlayer = props => {
   }, 0);
 
   return (
-    <View style={styles.playerdisplayrowtop}>
+    <View style={styles.playerdisplayrowtop, {width:props.width - 64}}>
       <View style={styles.scoredisplayrow1}>
         <Text style={styles.playername}>{props.player.item.name}</Text>
         <Text style={styles.removebutton}>{totalscore}</Text>
       </View>
-     <View style={styles.scoredisplayrow2}>
+     <View style={styles.scoredisplayrow2, {width:props.width - 64}}>
        <FlatList data={scores}
                  horizontal={true}
                  keyExtractor={keyExtractor}

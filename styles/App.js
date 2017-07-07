@@ -247,18 +247,26 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.5)',
     flexDirection: 'row',
     flex: 1,
-    marginBottom: 5,
   },
   scoredisplayrow2: {
     flexDirection: 'row',
     flex: 2,
   },
-  scorebox: {
+  scoreboxtop: {
     fontWeight: 'bold',
     height: 30,
     width: 30,
     textAlign: 'center',
     lineHeight: 30,
+    borderColor: 'black',
+    borderWidth: 1,
+  },
+  scorebox: {
+    fontWeight: 'bold',
+    height: 45,
+    width: 45,
+    textAlign: 'center',
+    lineHeight: 45,
     borderColor: 'black',
     borderWidth: 1,
   },

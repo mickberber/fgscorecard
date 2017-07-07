@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, View, FlatList, AsyncStorage, TouchableHighlight } from 'react-native';
+import { Dimensions, Image, Text, View, FlatList, AsyncStorage, TouchableHighlight } from 'react-native';
 import { Link } from 'react-router-native';
 
 import FinishedPlayer from './FinishedPlayer';
@@ -83,6 +83,7 @@ export default class FinishGame extends React.Component {
   }
 
   render() {
+    let { height, width } = Dimensions.get('window');
     return (
       <View style={styles.container}>
         <Image style={styles.image}
@@ -90,12 +91,16 @@ export default class FinishGame extends React.Component {
           <Text style={styles.statsapptitle}>fgScorecard</Text>
           <Text style={styles.statscoursetitle}>{this.courseTitle}</Text>
           <FlatList data={this.course.holes}
+                    style={{width: width - 20, height:140, marginBottom: 20}}
                     horizontal={true}
                     keyExtractor={keyExtractorHole}
-                    renderItem={(hole) => <Text style={styles.scorebox}>{hole.item.par}</Text>} />
+                    renderItem={(hole) => <View>
+                      <Text style={styles.scoreboxtop}>{hole.item.number}</Text>
+                      <Text style={styles.scoreboxtop}>{hole.item.par}</Text>
+                    </View>} />
           <FlatList data={this.players}
                     keyExtractor={keyExtractor}
-                    renderItem={(player) => <FinishedPlayer player={player} />} />
+                    renderItem={(player) => <FinishedPlayer player={player} height={height} width={width} />} />
           {!this.state.finished ? <TouchableHighlight style={styles.link} onPress={() => { this._finishgame(); }}>
               <Text style={styles.resumebutton}>Save Game</Text>
             </TouchableHighlight> : null}
