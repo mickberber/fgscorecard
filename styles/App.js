@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   },
   apptitle: {
     color: 'black',
+    // backgroundColor: 'rgba(52, 52, 52, 0.5)',
     fontWeight: 'bold',
     fontFamily: 'Baskerville',
     fontSize: 65,
@@ -269,6 +270,17 @@ export const styles = StyleSheet.create({
     lineHeight: 45,
     borderColor: 'black',
     borderWidth: 1,
+  },
+  currentholebox: {
+    fontWeight: 'bold',
+    height: 45,
+    width: 45,
+    textAlign: 'center',
+    lineHeight: 45,
+    borderColor: 'white',
+    borderWidth: 1,
+    color: 'white',
+    backgroundColor: 'rgba(52, 52, 52, 0.5)',
   },
   // Stats Pages
   statscontainer: {

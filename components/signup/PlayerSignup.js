@@ -34,10 +34,15 @@ export default class PlayerSignup extends React.Component {
     }
 
     this.setState({ text: '' });
+    let scores = [];
+    for(let i = 0; i < 18; i++) {
+      scores.push({key: i, score: 0});
+    }
+
     this.props.playersignup('add', {
       key: this.props.totalPlayers,
       name: this.state.text,
-      scores: [],
+      scores,
     });
   }
 

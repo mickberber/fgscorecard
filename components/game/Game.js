@@ -28,6 +28,7 @@ export default class Game extends React.Component {
       courseTitle: 'Monarch Bay',
     }
 
+    this._goOneHoleBack = this._goOneHoleBack.bind(this);
     this._playersignup = this._playersignup.bind(this);
     this._pickCourse = this._pickCourse.bind(this);
     this._incrementscore = this._incrementscore.bind(this);
@@ -67,16 +68,14 @@ export default class Game extends React.Component {
         this.setState({ players });
         break;
       case 'finish':
-        players = this.state.players.map((player) => {
-          return Object.assign({}, player, {
-            scores: player.scores.concat([{key: 0, score: 0}])
-          });
-        });
+        if (this.state.players.length === 0) {
+          Alert.alert('Please enter a name.');
+          return;
+        }
         let course = this._pickCourse(options);
         this.setState({
           currentHole: 1,
           courseTitle: options,
-          players,
           course,
         });
         break;
@@ -86,12 +85,13 @@ export default class Game extends React.Component {
   }
 
   _incrementscore(sign, playerkey) {
+    let index = this.state.currentHole - 1;
     const players = this.state.players.map((player) => {
       if (player.key !== playerkey) {
         return player;
       } else {
-        const key = player.scores[this.state.currentHole - 1].key;
-        const oldscore = player.scores[this.state.currentHole - 1].score;
+        const key = player.scores[index].key;
+        let oldscore = player.scores[index].score;
         let newscore = (sign === '+') ?
           oldscore + 1 : oldscore - 1;
         if (newscore < 0) {
@@ -99,26 +99,29 @@ export default class Game extends React.Component {
         }
         return Object.assign({}, player, {
           scores: player.scores.slice(0, this.state.currentHole - 1)
-                               .concat([{key, score: newscore}])
+                               .concat([{key, score: newscore}]
+                               .concat(player.scores.slice(this.state.currentHole)))
         });
       }
     });
 
     this.setState({
       players,
+      currentHole: this.state.currentHole,
     });
   }
 
   _finishhole() {
-    const players = this.state.players.map((player) => {
-      return Object.assign({}, player, {
-        scores: player.scores.concat([{key: this.state.currentHole, score: 0}]),
-      });
-    });
     this.setState({
       currentHole: this.state.currentHole + 1,
-      players,
     });
+  }
+
+  _goOneHoleBack() {
+    if (this.state.currentHole === 1) {
+      return;
+    }
+    this.setState({currentHole: this.state.currentHole - 1});
   }
 
   _toggleModal() {
@@ -191,10 +194,6 @@ export default class Game extends React.Component {
                            totalPlayers={this.state.totalPlayers} />
     }
 
-    const currentHole = this.state.currentHole;
-    const coursehalf = (currentHole > 9) ?
-      this.state.course.back : this.state.course.front;
-
     if (this.state.course.holes[this.state.currentHole - 1] === undefined) {
       const game = {
         players: this.state.players,
@@ -202,9 +201,12 @@ export default class Game extends React.Component {
       };
       return <FinishGame players={this.state.players}
                          game={game}
-                       />
+                         />
     }
 
+    const currentHole = this.state.currentHole;
+    const coursehalf = (currentHole > 9) ?
+      this.state.course.back : this.state.course.front;
     /* TODO: remove course related and just use this.state.course */
     return (
       <View style={styles.container}>
@@ -219,11 +221,15 @@ export default class Game extends React.Component {
                           coursehalf={coursehalf}
                           currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
           </View>
+          <TouchableHighlight style={styles.finishholelink} onPress={() => { this._goOneHoleBack(); }}>
+            <Text style={styles.finishholebutton}>Previous Hole</Text>
+          </TouchableHighlight>
           <TouchableHighlight style={styles.finishholelink} onPress={() => { this._finishhole(); }}>
-            <Text style={styles.finishholebutton}>Finish Hole</Text>
+            <Text style={styles.finishholebutton}>Next Hole</Text>
           </TouchableHighlight>
           <View style={{flex: 2}}>
             <FlatList data={this.state.players}
+                      extraData={this.state.currentHole}
                       renderItem={(player) => <GamePlayer player={player}
                                                           currentHole={this.state.currentHole}
                                                           incrementscore={this._incrementscore} />} />
