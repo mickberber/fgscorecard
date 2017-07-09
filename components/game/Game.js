@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Alert, Text, Modal, AsyncStorage, TouchableHighlight, View, FlatList } from 'react-native';
+import { Dimensions, Image, Alert, Text, Modal, AsyncStorage, TouchableHighlight, View, FlatList } from 'react-native';
 import { Redirect } from 'react-router-native';
 
 import PlayerSignup from './../signup/PlayerSignup';
@@ -207,6 +207,7 @@ export default class Game extends React.Component {
     const currentHole = this.state.currentHole;
     const coursehalf = (currentHole > 9) ?
       this.state.course.back : this.state.course.front;
+    let { height, width } = Dimensions.get('window');
     /* TODO: remove course related and just use this.state.course */
     return (
       <View style={styles.container}>
@@ -232,7 +233,9 @@ export default class Game extends React.Component {
                       extraData={this.state.currentHole}
                       renderItem={(player) => <GamePlayer player={player}
                                                           currentHole={this.state.currentHole}
-                                                          incrementscore={this._incrementscore} />} />
+                                                          incrementscore={this._incrementscore}
+                                                          height={height}
+                                                          width={width} />} />
           </View>
           <TouchableHighlight style={styles.link} onPress={() => { this._toggleModal(); }}>
             <Text style={styles.button}>Save/Quit</Text>

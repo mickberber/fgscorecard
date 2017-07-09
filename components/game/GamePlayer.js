@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert, Text, TouchableHighlight, View, FlatList } from 'react-native';
 
+import GamePlayerButtons from './GamePlayerButtons';
 import { styles } from './../../styles/App';
 
 const GamePlayer = props => {
@@ -19,20 +20,11 @@ const GamePlayer = props => {
 
   return (
     <View style={styles.playerdisplayrowtop}>
-      {/*  TODO: refactor out these counters to a sepreate component */}
-      <View style={styles.scoredisplayrow1}>
-        <Text style={styles.gameplayername}>{props.player.item.name}</Text>
-        <TouchableHighlight onPress={() => { incrementScore('+'); }}>
-          <Text style={styles.plusbutton}>+</Text>
-        </TouchableHighlight>
-        <Text style={styles.removebutton}>{currentscore}</Text>
-        <TouchableHighlight onPress={() => { incrementScore('-'); }}>
-          <Text style={styles.minusbutton}>-</Text>
-        </TouchableHighlight>
-        <Text style={styles.removebutton}>{totalscore}</Text>
-      </View>
-      {/*  END TODO */}
-      <View style={styles.scoredisplayrow2}>
+      <GamePlayerButtons totalscore={totalscore}
+                         name={props.player.item.name}
+                         currentscore={currentscore}
+                         incrementScore={incrementScore} />
+      <View style={styles.scoredisplayrow2, {width: props.width - 32}}>
         <FlatList data={scores}
                   horizontal={true}
                   renderItem={(score) => {
