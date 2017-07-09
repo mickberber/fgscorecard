@@ -36,6 +36,8 @@ export default class FinishGame extends React.Component {
 
     this._savegame = this._savegame.bind(this);
     this._updatePlayers = this._updatePlayers.bind(this);
+    this._calculateAvg = this._calculateAvg.bind(this);
+    this._getLastFive = this._getLastFive.bind(this);
   }
 
   _pickCourse(course) {
@@ -55,6 +57,33 @@ export default class FinishGame extends React.Component {
     }
   }
 
+  _calculateAvg(scoresArray) {
+    let totalscore = 0;
+    scoresArray.forEach((scoreArray) => {
+      scoreArray.forEach((score) => {
+        totalscore += score.score;
+      });
+    });
+    return totalscore;
+  }
+
+  _getLastFive(scoresArray) {
+    let lastFive = [];
+    for(let i = 1; i < 6; i++) {
+      let coursescore = 0;
+      if(scoresArray[scoresArray.length - i]) {
+        scoresArray[scoresArray.length - i].forEach((score) => {
+          coursescore += score.score;
+        });
+        lastFive.push({
+          coursescore,
+          length: scoresArray[scoresArray.length - i].length,
+        });
+      }
+    }
+    return lastFive;
+  }
+
   _updatePlayers(statePlayers, propsPlayers) {
     let gamePlayerNames = {};
     propsPlayers.forEach((player) => {
@@ -68,6 +97,8 @@ export default class FinishGame extends React.Component {
       } else {
         player.alltimescores.push(gamePlayerNames[player.name].scores)
         player.games.push(this.props.game);
+        player.averagepernine = this._calculateAvg(player.alltimescores);
+        player.lastfive = this._getLastFive(player.alltimescores);
         delete gamePlayerNames[player.name];
         return player;
       }
@@ -79,7 +110,9 @@ export default class FinishGame extends React.Component {
       const newPlayer = {
         name,
         alltimescores: [gamePlayerNames[name].scores],
+        averagepernine: this._calculateAvg([gamePlayerNames[name].scores]),
         games: [this.props.game],
+        lastfive: this._getLastFive([gamePlayerNames[name].scores]),
       };
       newPlayers.push(newPlayer);
     }

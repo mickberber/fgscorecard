@@ -12,18 +12,6 @@ export default class Players extends React.Component {
     this.state = {
       players: [],
     };
-
-    this._calculateAvg = this._calculateAvg.bind(this);
-  }
-
-  _calculateAvg(scoresArray) {
-    let totalscore = 0;
-    scoresArray.forEach((scoreArray) => {
-      scoreArray.forEach((score) => {
-        totalscore += score.score;
-      });
-    });
-    return totalscore;
   }
 
   componentDidMount() {
@@ -62,11 +50,17 @@ export default class Players extends React.Component {
             <FlatList data={this.state.players}
                       keyExtractor={keyExtractor}
                       renderItem={(player) => <View>
-                        <Text>{player.item.name}</Text>
-                        <Text>Avg/9: {this._calculateAvg(player.item.alltimescores)}</Text>
+                        <View style={{flexDirection: 'row'}}>
+                          <Text>{player.item.name}</Text>
+                          <Text>Avg/9: {player.item.averagepernine}</Text>
+                          <Text>Total Games: {player.item.alltimescores.length}</Text>
+                        </View>
+                        <View style={{flexDirection: 'row'}}>
+                          <Text>Last 5: {player.item.lastfive.map((obj, i) => {
+                            return <Text key={i}>{obj.coursescore}, ({obj.length})</Text>
+                          })}</Text>
+                        </View>
                       </View>} />
-          </View>
-          <View style={{flex:2}}>
             <Link to='/statistics' style={styles.link}>
               <Text style={styles.resumebutton}>Statistics</Text>
             </Link>

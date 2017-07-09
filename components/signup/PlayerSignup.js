@@ -35,7 +35,8 @@ export default class PlayerSignup extends React.Component {
 
     this.setState({ text: '' });
     let scores = [];
-    for(let i = 0; i < 18; i++) {
+    let limit = (this.state.course !== 'Monarch Bay') ? 9 : 18;
+    for(let i = 0; i < limit; i++) {
       scores.push({key: i, score: 0});
     }
 
