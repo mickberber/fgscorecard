@@ -64,7 +64,7 @@ export default class FinishGame extends React.Component {
         totalscore += score.score;
       });
     });
-    return totalscore;
+    return Math.round(totalscore / scoresArray.length);
   }
 
   _getLastFive(scoresArray) {
