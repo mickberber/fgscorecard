@@ -22,6 +22,9 @@ export default class Players extends React.Component {
         if (players === null) {
           players = [];
         }
+        players.sort((a, b) => {
+          return a.averagepernine - b.averagepernine;
+        })
         this.setState({
           players
         });

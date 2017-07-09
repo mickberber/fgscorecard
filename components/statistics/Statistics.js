@@ -77,9 +77,6 @@ export default class Statistics extends React.Component {
        <Image style={styles.image}
               source={require('./../../assets/footgolf.jpg')}>
         <Text style={styles.statsapptitle}> fgScorecard </Text>
-        <Link style={styles.link} to='/players'>
-          <Text style={styles.resumebutton}>Players</Text>
-        </Link>
         <FlatList data={this.state.games}
                   horizontal={false}
                   keyExtractor={keyExtractorGames}
@@ -105,6 +102,7 @@ export default class Statistics extends React.Component {
                           <Text style={styles.statsdetailsbutton}>Details</Text>
                         </Link>
                       </Text>
+                      <Text>{game.item.date}</Text>
                       <FlatList data={game.item.players}
                                 style={{width: width - 100, backgroundColor: 'rgba(52, 52, 52, 0.5)',}}
                                 horizontal={true}
@@ -120,6 +118,9 @@ export default class Statistics extends React.Component {
                                 }} />
                     </View>
                   }}/>
+          <Link to='/players' style={styles.link}>
+            <Text style={styles.resumebutton}>Players</Text>
+          </Link>
           <Link to='/' style={styles.link}>
             <Text style={styles.button}>Home</Text>
           </Link>

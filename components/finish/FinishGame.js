@@ -177,7 +177,10 @@ export default class FinishGame extends React.Component {
         <Image style={styles.image}
                source={require('./../../assets/footgolf.jpg')}>
           <Text style={styles.statsapptitle}>fgScorecard</Text>
-          <Text style={styles.statscoursetitle}>{this.courseTitle}</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.statscoursetitle}>{this.courseTitle}</Text>
+            <Text style={styles.statscoursetitle}>{this.course.date}</Text>
+          </View>
           <FlatList data={this.course.holes}
                     style={{width: width - 20}}
                     horizontal={true}
