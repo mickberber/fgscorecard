@@ -74,6 +74,9 @@ export default class Statistics extends React.Component {
        <Image style={styles.image}
               source={require('./../../assets/footgolf.jpg')}>
         <Text style={styles.statsapptitle}> fgScorecard </Text>
+        <Link style={styles.link} to='/players'>
+          <Text style={styles.resumebutton}>Players</Text>
+        </Link>
         <FlatList data={this.state.games}
                   horizontal={false}
                   keyExtractor={keyExtractorGames}

@@ -48,9 +48,6 @@ class Home extends React.Component {
           <Link to='/statistics' style={styles.link}>
             <Text style={styles.resumebutton}>statistics</Text>
           </Link>
-          {/* <Link to='/players'>
-            <Text style={styles.statisticsbutton}>Players</Text>
-          </Link> */}
         </View>
       </Image>
     </View>);
