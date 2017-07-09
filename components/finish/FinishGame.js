@@ -8,7 +8,8 @@ import {
   MonarchBay,
   Pruneridge,
   LasPositas,
-  SantaTeresa
+  SantaTeresa,
+  RanchoDelPueblo
 } from './../../courses/courses';
 
 const keyExtractor = (item, index) => {
@@ -32,6 +33,9 @@ export default class FinishGame extends React.Component {
       totalGames: null,
       finished: props.location ? true : false,
     };
+
+    this._savegame = this._savegame.bind(this);
+    this._updatePlayers = this._updatePlayers.bind(this);
   }
 
   _pickCourse(course) {
@@ -44,17 +48,56 @@ export default class FinishGame extends React.Component {
         return LasPositas;
       case 'Santa Teresa':
         return SantaTeresa;
+      case 'Rancho Del Pueblo':
+        return RanchoDelPueblo;
       default:
         return MonarchBay;
     }
   }
 
-  _finishgame() {
+  _updatePlayers(statePlayers, propsPlayers) {
+    let gamePlayerNames = {};
+    propsPlayers.forEach((player) => {
+      gamePlayerNames[player.name] = player;
+    });
+
+
+    let returningPlayers = statePlayers.map((player) => {
+      if (gamePlayerNames[player.name] === undefined) {
+        return player;
+      } else {
+        player.alltimescores.push(gamePlayerNames[player.name].scores)
+        player.games.push(this.props.game);
+        delete gamePlayerNames[player.name];
+        return player;
+      }
+    });
+
+
+    let newPlayers = [];
+    for (let name in gamePlayerNames) {
+      const newPlayer = {
+        name,
+        alltimescores: [gamePlayerNames[name].scores],
+        games: [this.props.game],
+      };
+      newPlayers.push(newPlayer);
+    }
+
+    return returningPlayers.concat(newPlayers);
+  }
+
+  _savegame() {
     (async () => {
       try {
-        // Use to clear db
-        // const val = await AsyncStorage.setItem('games', JSON.stringify([]));
-        const val = await AsyncStorage.setItem('games', JSON.stringify(this.state.games.concat([this.props.game])));
+        const games = await AsyncStorage.setItem('games',
+                              JSON.stringify(
+                              this.state.games.concat(
+                              [this.props.game])));
+        const players = await AsyncStorage.setItem('players',
+                                JSON.stringify(
+                                this._updatePlayers(
+                                this.state.players, this.players)));
         this.setState({
           finished: true,
         })
@@ -68,13 +111,19 @@ export default class FinishGame extends React.Component {
     (async () => {
       try {
         let games = await AsyncStorage.getItem('games');
+        let players = await AsyncStorage.getItem('players');
         games = JSON.parse(games);
+        players = JSON.parse(players);
         if (games === null) {
           games = [];
         }
+        if (players === null) {
+          players = [];
+        }
         this.setState({
           totalGames: games.length,
-          games
+          games,
+          players,
         });
       } catch (error) {
         console.error(error);
@@ -101,8 +150,8 @@ export default class FinishGame extends React.Component {
           <FlatList data={this.players}
                     keyExtractor={keyExtractor}
                     renderItem={(player) => <FinishedPlayer player={player} height={height} width={width} />} />
-          {!this.state.finished ? <TouchableHighlight style={styles.link} onPress={() => { this._finishgame(); }}>
-              <Text style={styles.resumebutton}>Save Game</Text>
+          {!this.state.finished ? <TouchableHighlight style={styles.link} onPress={() => { this._savegame(); }}>
+              <Text style={styles.button}>Save Game</Text>
             </TouchableHighlight> : null}
           {this.state.finished ? <Link to='/statistics' style={styles.link}>
             <Text style={styles.resumebutton}>Statistics</Text>

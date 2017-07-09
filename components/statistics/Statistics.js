@@ -47,6 +47,9 @@ export default class Statistics extends React.Component {
   componentDidMount() {
     (async () => {
       try {
+        // Use to clear db
+        // const val = await AsyncStorage.setItem('games', JSON.stringify([]));
+        // const val1 = await AsyncStorage.setItem('players', JSON.stringify([]));
         let games = await AsyncStorage.getItem('games');
         games = JSON.parse(games);
         if (games === null) {
