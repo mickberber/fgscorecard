@@ -27,6 +27,7 @@ export default class Game extends React.Component {
       showModal: false,
       course: MonarchBay,
       courseTitle: 'Monarch Bay',
+      date: new Date(),
     }
 
     this._goOneHoleBack = this._goOneHoleBack.bind(this);
@@ -160,8 +161,6 @@ export default class Game extends React.Component {
           courseTitle: 'Monarch Bay',
           showModal: false,
         };
-        // Use to clear db
-        // const val = await AsyncStorage.setItem('games', JSON.stringify([]));
         const val = await AsyncStorage.setItem('currentGame', JSON.stringify(defaultstate));
         this.setState({
           transition: true,

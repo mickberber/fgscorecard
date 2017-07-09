@@ -58,13 +58,18 @@ export default class FinishGame extends React.Component {
   }
 
   _calculateAvg(scoresArray) {
+    let totalnines = 0
     let totalscore = 0;
     scoresArray.forEach((scoreArray) => {
       scoreArray.forEach((score) => {
         totalscore += score.score;
       });
+      if (scoreArray.length === 18) {
+        totalnines++;
+      }
+      totalnines++;
     });
-    return Math.round(totalscore / scoresArray.length);
+    return Math.round(totalscore / totalnines);
   }
 
   _getLastFive(scoresArray) {
@@ -78,6 +83,7 @@ export default class FinishGame extends React.Component {
         lastFive.push({
           coursescore,
           length: scoresArray[scoresArray.length - i].length,
+          courseTitle: this.courseTitle,
         });
       }
     }
@@ -111,8 +117,8 @@ export default class FinishGame extends React.Component {
         name,
         alltimescores: [gamePlayerNames[name].scores],
         averagepernine: this._calculateAvg([gamePlayerNames[name].scores]),
-        games: [this.props.game],
         lastfive: this._getLastFive([gamePlayerNames[name].scores]),
+        games: [this.props.game],
       };
       newPlayers.push(newPlayer);
     }

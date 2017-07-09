@@ -19,7 +19,6 @@ export default class Players extends React.Component {
       try {
         let players = await AsyncStorage.getItem('players');
         players = JSON.parse(players);
-        console.log(players)
         if (players === null) {
           players = [];
         }
@@ -51,13 +50,24 @@ export default class Players extends React.Component {
                       keyExtractor={keyExtractor}
                       renderItem={(player) => <View>
                         <View style={{flexDirection: 'row'}}>
-                          <Text>{player.item.name}</Text>
-                          <Text>Avg/9: {player.item.averagepernine}</Text>
-                          <Text>Total Games: {player.item.alltimescores.length}</Text>
+                          <Text>{player.item.name} </Text>
+                          <Link style={styles.statsdetailslink}
+                            to={{
+                              pathname: `/players/${player.index}`,
+                              query: {
+                                player: player.item,
+                              }
+                            }}>
+                            <Text style={styles.statsdetailsbutton}>Card</Text>
+                          </Link>
+                        </View>
+                        <View style={{flexDirection: 'row'}}>
+                          <Text>Avg/9: {player.item.averagepernine} </Text>
+                          <Text>Total Games: {player.item.alltimescores.length} </Text>
                         </View>
                         <View style={{flexDirection: 'row'}}>
                           <Text>Last 5: {player.item.lastfive.map((obj, i) => {
-                            return <Text key={i}>{obj.coursescore}, ({obj.length})</Text>
+                            return <Text key={i}>{obj.coursescore}, ({obj.length}) </Text>
                           })}</Text>
                         </View>
                       </View>} />
