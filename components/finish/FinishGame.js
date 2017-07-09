@@ -91,7 +91,7 @@ export default class FinishGame extends React.Component {
           <Text style={styles.statsapptitle}>fgScorecard</Text>
           <Text style={styles.statscoursetitle}>{this.courseTitle}</Text>
           <FlatList data={this.course.holes}
-                    style={{width: width - 20, height:140, marginBottom: 20}}
+                    style={{width: width - 20}}
                     horizontal={true}
                     keyExtractor={keyExtractorHole}
                     renderItem={(hole) => <View>

@@ -43,7 +43,7 @@ class Home extends React.Component {
                                     loadgame: true,
                                   }}}
                             style={styles.link}>
-            <Text style={styles.resumebutton}>resume</Text>
+            <Text style={styles.button}>resume</Text>
           </Link>) }
           <Link to='/statistics' style={styles.link}>
             <Text style={styles.resumebutton}>statistics</Text>

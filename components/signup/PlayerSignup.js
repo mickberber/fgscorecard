@@ -82,6 +82,7 @@ export default class PlayerSignup extends React.Component {
                <Picker.Item label={"Pruneridge"} value={"Pruneridge"} />
                <Picker.Item label={'Las Positas'} value={'Las Positas'} />
                <Picker.Item label={'Santa Teresa'} value={'Santa Teresa'} />
+               <Picker.Item label={'Rancho Del Pueblo'} value={'Rancho Del Pueblo'} />
              </Picker>
            </Modal>
            {/* END TODO */}

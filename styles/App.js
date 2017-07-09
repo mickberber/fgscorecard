@@ -70,9 +70,21 @@ export const styles = StyleSheet.create({
   finishholelink: {
     backgroundColor: '#009e0a',
     height: 50,
-    width: 250,
-    marginTop: 10,
-    marginBottom: 20,
+    width: 125,
+    margin: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+  },
+  previousholelink: {
+    backgroundColor: '#2b6cdb',
+    height: 50,
+    width: 125,
+    margin: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -100,7 +112,6 @@ export const styles = StyleSheet.create({
   picker: {
     height: 750,
     justifyContent: 'center',
-    backgroundColor: 'rgba(52, 52, 52, 0.5)',
   },
   pickcourse: {
     marginTop: 20,

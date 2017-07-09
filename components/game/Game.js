@@ -11,7 +11,8 @@ import {
   MonarchBay,
   Pruneridge,
   LasPositas,
-  SantaTeresa
+  SantaTeresa,
+  RanchoDelPueblo
 } from './../../courses/courses';
 import { styles } from './../../styles/App';
 
@@ -47,6 +48,8 @@ export default class Game extends React.Component {
         return LasPositas;
       case 'Santa Teresa':
         return SantaTeresa;
+      case 'Rancho Del Pueblo':
+        return RanchoDelPueblo;
       default:
         return MonarchBay;
     }
@@ -200,8 +203,7 @@ export default class Game extends React.Component {
         courseTitle: this.state.courseTitle,
       };
       return <FinishGame players={this.state.players}
-                         game={game}
-                         />
+                         game={game} />
     }
 
     const currentHole = this.state.currentHole;
@@ -222,12 +224,14 @@ export default class Game extends React.Component {
                           coursehalf={coursehalf}
                           currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
           </View>
-          <TouchableHighlight style={styles.finishholelink} onPress={() => { this._goOneHoleBack(); }}>
-            <Text style={styles.finishholebutton}>Previous Hole</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.finishholelink} onPress={() => { this._finishhole(); }}>
-            <Text style={styles.finishholebutton}>Next Hole</Text>
-          </TouchableHighlight>
+          <View style={{flexDirection: 'row'}}>
+            <TouchableHighlight style={styles.previousholelink} onPress={() => { this._goOneHoleBack(); }}>
+              <Text style={styles.finishholebutton}>Previous Hole</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.finishholelink} onPress={() => { this._finishhole(); }}>
+              <Text style={styles.finishholebutton}>Next Hole</Text>
+            </TouchableHighlight>
+          </View>
           <View style={{flex: 2}}>
             <FlatList data={this.state.players}
                       extraData={this.state.currentHole}
@@ -241,19 +245,19 @@ export default class Game extends React.Component {
             <Text style={styles.button}>Save/Quit</Text>
           </TouchableHighlight>
           <Modal animationType={"slide"}
-                 transparent={false}
+                 transparent={true}
                  visible={this.state.showModal}>
                  <View style={{
                    flex: 1,
                    justifyContent: 'center',
                    alignItems: 'center',
-                   backgroundColor: 'rgba(52, 52, 52, 0.5)',
+                   backgroundColor: 'rgba(52, 52, 52, 0.7)',
                  }} >
                    <TouchableHighlight style={styles.link} onPress={() => { this._toggleModal(); }}>
-                     <Text style={styles.button}>Resume</Text>
+                     <Text style={styles.resumebutton}>Resume</Text>
                    </TouchableHighlight>
                    <TouchableHighlight style={styles.link} onPress={() => { this._savegame(); }}>
-                     <Text style={styles.button}>Save</Text>
+                     <Text style={styles.resumebutton}>Save</Text>
                    </TouchableHighlight>
                    <TouchableHighlight style={styles.link} onPress={() => { this._quitgame(); }}>
                      <Text style={styles.quitbutton}>Quit</Text>

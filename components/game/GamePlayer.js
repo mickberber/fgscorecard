@@ -28,8 +28,12 @@ const GamePlayer = props => {
         <FlatList data={scores}
                   horizontal={true}
                   renderItem={(score) => {
-                    return <Text style={props.currentHole - 1 === score.index ?
+                    return <View>
+                      <Text style={props.currentHole - 1 === score.index ?
+                        styles.currentholebox : styles.scorebox}>{score.index + 1}</Text>
+                      <Text style={props.currentHole - 1 === score.index ?
                         styles.currentholebox : styles.scorebox}>{score.item.score}</Text>
+                    </View>
                   }} />
       </View>
     </View>

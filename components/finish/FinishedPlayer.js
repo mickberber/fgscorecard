@@ -17,12 +17,16 @@ const FinishedPlayer = props => {
         <Text style={styles.playername}>{props.player.item.name}</Text>
         <Text style={styles.removebutton}>{totalscore}</Text>
       </View>
-     <View style={styles.scoredisplayrow2, {width:props.width - 64}}>
+     <View>
        <FlatList data={scores}
+                 style={styles.scoredisplayrow2, {width:props.width - 64}}
                  horizontal={true}
                  keyExtractor={keyExtractor}
                  renderItem={(score) => {
-                   return <Text style={styles.scorebox}>{score.item.score}</Text>
+                   return <View>
+                     <Text style={styles.scorebox}>{score.index + 1}</Text>
+                     <Text style={styles.scorebox}>{score.item.score}</Text>
+                   </View>
                  }} />
       </View>
     </View>
