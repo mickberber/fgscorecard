@@ -40,8 +40,8 @@ export default class PlayerDetail extends React.Component {
                                      backgroundColor: 'rgba(52, 52, 52, 0.3)',
                                      width: width - 100,
                                    }}>
-        { (i === 0) ? (<Text style={styles.statsname}>Last 5: </Text>) : null }
-        <Text style={styles.statsname}>{obj.courseTitle ? obj.courseTitle : ''} {obj.coursescore}, ({obj.length}) </Text>
+        { (i === 0) ? (<Text style={styles.courseheader}>Last 5: </Text>) : null }
+        <Text style={styles.statsnameend}>{obj.courseTitle ? obj.courseTitle : ''} {obj.coursescore}, ({obj.length}) </Text>
       </View>
     });
     return (
@@ -50,15 +50,25 @@ export default class PlayerDetail extends React.Component {
                source={require('./../../assets/footgolf.jpg')}>
           <Text style={styles.statsapptitle}>fgScorecard</Text>
           <Text style={styles.statsapptitle}>{this.player.name}</Text>
-          <View style={{flexDirection: 'column'}}>
-            <View style={{backgroundColor: 'rgba(52, 52, 52, 0.3)', width: width - 100, marginBottom: 10}}>
-              <Text style={styles.statsname}>Avg/9: {this.player.averagepernine}</Text>
-              <Text style={styles.statsname}>Total Games: {this.player.alltimescores.length}</Text>
-              <Text style={styles.statsname}>Best 18: {bests.bestscore18}</Text>
-              <Text style={styles.statsname}>Best 9: {bests.bestscore9}</Text>
+          <View style={styles.playerdetailscontainer}>
+            <View style={styles.detailscolumn}>
+              <Text style={styles.courseheader}>Avg/9:</Text>
+              <Text style={styles.statsnameend}>{this.player.averagepernine}</Text>
             </View>
-            {lastfive}
+            <View style={styles.detailscolumn}>
+              <Text style={styles.courseheader}>Games:</Text>
+              <Text style={styles.statsnameend}>{this.player.alltimescores.length}</Text>
+            </View>
+            <View style={styles.detailscolumn}>
+              <Text style={styles.courseheader}>Best 18:</Text>
+              <Text style={styles.statsnameend}>{bests.bestscore18}</Text>
+            </View>
+            <View style={styles.detailscolumn}>
+              <Text style={styles.courseheader}>Best 9:</Text>
+              <Text style={styles.statsnameend}>{bests.bestscore9}</Text>
+            </View>
           </View>
+          {lastfive}
           <View style={{flexDirection: 'row'}}>
             <Link to='/' style={styles.finishholelink}>
               <Text style={styles.finishholebutton}>Home</Text>

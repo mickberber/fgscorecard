@@ -214,6 +214,14 @@ export const styles = StyleSheet.create({
     width: 350,
     marginTop: 20,
   },
+  playerdetailscontainer: {
+    backgroundColor: 'rgba(52, 52, 52, 0.5)',
+    flexDirection: 'row',
+    height: 50,
+    width: 350,
+    marginTop: 20,
+    marginBottom: 20,
+  },
   detailscolumn: {
     flex: 1,
     flexDirection: 'column',
@@ -362,5 +370,17 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     fontWeight: 'bold',
     fontSize: 15,
+  },
+  statsnameend: {
+    color: 'white',
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
+    fontSize: 15,
+    textShadowColor: 'black',
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    textShadowRadius: 10,
   },
 });
