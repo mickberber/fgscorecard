@@ -19,10 +19,10 @@ export default class PlayerDetail extends React.Component {
       scoreArray.forEach((score) => {
         totalscore += score.score;
       });
-      if (scoreArray.length === 18 && totalscore < bestscore18) {
+      if (scoreArray.length === 18 && totalscore > bestscore18) {
         bestscore18 = totalscore;
       }
-      if (scoreArray.length === 9 && totalscore < bestscore9) {
+      if (scoreArray.length === 9 && totalscore > bestscore9) {
         bestscore9 = totalscore;
       }
     });
@@ -36,9 +36,12 @@ export default class PlayerDetail extends React.Component {
     let { height, width } = Dimensions.get('window');
     let bests = this._calculateBests(this.player.alltimescores);
     let lastfive = this.player.lastfive.map((obj, i) => {
-      return <View key={i}>
-        <Text>{obj.courseTitle ? obj.courseTitle : ''} </Text>
-        <Text>{obj.coursescore}, ({obj.length}) </Text>
+      return <View key={i}  style={{ marginBottom: 10,
+                                     backgroundColor: 'rgba(52, 52, 52, 0.3)',
+                                     width: width - 100,
+                                   }}>
+        { (i === 0) ? (<Text style={styles.statsname}>Last 5: </Text>) : null }
+        <Text style={styles.statsname}>{obj.courseTitle ? obj.courseTitle : ''} {obj.coursescore}, ({obj.length}) </Text>
       </View>
     });
     return (
@@ -47,24 +50,23 @@ export default class PlayerDetail extends React.Component {
                source={require('./../../assets/footgolf.jpg')}>
           <Text style={styles.statsapptitle}>fgScorecard</Text>
           <Text style={styles.statsapptitle}>{this.player.name}</Text>
-          <View style={{flexDirection: 'row'}}>
-            <Text>Avg/9: {this.player.averagepernine} </Text>
-            <Text>Total Games: {this.player.alltimescores.length} </Text>
-          </View>
-          <View style={{flexDirection: 'row'}}>
-            <Text>Best 18: {bests.bestscore18} </Text>
-            <Text>Best 9: {bests.bestscore9} </Text>
-          </View>
           <View style={{flexDirection: 'column'}}>
-            <Text>Last 5: </Text>
+            <View style={{backgroundColor: 'rgba(52, 52, 52, 0.3)', width: width - 100, marginBottom: 10}}>
+              <Text style={styles.statsname}>Avg/9: {this.player.averagepernine}</Text>
+              <Text style={styles.statsname}>Total Games: {this.player.alltimescores.length}</Text>
+              <Text style={styles.statsname}>Best 18: {bests.bestscore18}</Text>
+              <Text style={styles.statsname}>Best 9: {bests.bestscore9}</Text>
+            </View>
             {lastfive}
           </View>
-          <Link to='/statistics' style={styles.link}>
-            <Text style={styles.resumebutton}>Statistics</Text>
-          </Link>
-          <Link to='/' style={styles.link}>
-            <Text style={styles.resumebutton}>Home</Text>
-          </Link>
+          <View style={{flexDirection: 'row'}}>
+            <Link to='/' style={styles.finishholelink}>
+              <Text style={styles.finishholebutton}>Home</Text>
+            </Link>
+            <Link to='/statistics' style={styles.previousholelink}>
+              <Text style={styles.finishholebutton}>Statistics</Text>
+            </Link>
+          </View>
         </Image>
       </View>
     );
