@@ -118,12 +118,14 @@ export default class Statistics extends React.Component {
                                 }} />
                     </View>
                   }}/>
-          <Link to='/players' style={styles.link}>
-            <Text style={styles.resumebutton}>Players</Text>
-          </Link>
-          <Link to='/' style={styles.link}>
-            <Text style={styles.button}>Home</Text>
-          </Link>
+          <View style={{flexDirection: 'row'}}>
+            <Link to='/' style={styles.finishholelink}>
+              <Text style={styles.finishholebutton}>Home</Text>
+            </Link>
+            <Link to='/players' style={styles.previousholelink}>
+              <Text style={styles.finishholebutton}>Players</Text>
+            </Link>
+          </View>
         </Image>
       </View>
     );

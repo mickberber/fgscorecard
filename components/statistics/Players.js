@@ -42,43 +42,45 @@ export default class Players extends React.Component {
         width,
         alignItems: 'center',
         justifyContent: 'center'}}>
-        <Image style={styles.image,
-                      { flex:1,
-                        alignItems: 'center',
-                        justifyContent: 'center'}}
+        <Image style={styles.image}
                source={require('./../../assets/footgolf.jpg')}>
           <Text style={styles.statsapptitle}> fgScorecard </Text>
-          <View style={{flex:1}}>
+          <View style={{width: width - 50}}>
             <FlatList data={this.state.players}
                       keyExtractor={keyExtractor}
-                      renderItem={(player) => <View>
+                      renderItem={(player) => <View style={{
+                        marginBottom: 10,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: 'rgba(52, 52, 52, 0.3)'
+                      }}>
+                        <Text style={styles.statscoursetitle}>{player.item.name}
+                            <Link style={styles.statsdetailslink}
+                              to={{
+                                pathname: `/players/${player.index}`,
+                                query: {
+                                  player: player.item,
+                                }
+                              }}>
+                              <Text style={styles.statsdetailsbutton}>Player</Text>
+                            </Link>
+                        </Text>
                         <View style={{flexDirection: 'row'}}>
-                          <Text>{player.item.name} </Text>
-                          <Link style={styles.statsdetailslink}
-                            to={{
-                              pathname: `/players/${player.index}`,
-                              query: {
-                                player: player.item,
-                              }
-                            }}>
-                            <Text style={styles.statsdetailsbutton}>Card</Text>
-                          </Link>
+                          <Text style={styles.statsname}>Avg/9: {player.item.averagepernine} Total Games: {player.item.alltimescores.length} </Text>
                         </View>
                         <View style={{flexDirection: 'row'}}>
-                          <Text>Avg/9: {player.item.averagepernine} </Text>
-                          <Text>Total Games: {player.item.alltimescores.length} </Text>
-                        </View>
-                        <View style={{flexDirection: 'row'}}>
-                          <Text>Last 5: {player.item.lastfive.map((obj, i) => {
-                            return <Text key={i}>{obj.coursescore}, ({obj.length}) </Text>
+                          <Text style={styles.statsname}>Last 5: {player.item.lastfive.map((obj, i) => {
+                            return <Text key={i} style={styles.statsname}>{obj.coursescore}, ({obj.length}) </Text>
                           })}</Text>
                         </View>
                       </View>} />
-            <Link to='/statistics' style={styles.link}>
-              <Text style={styles.resumebutton}>Statistics</Text>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <Link to='/' style={styles.finishholelink}>
+              <Text style={styles.finishholebutton}>Home</Text>
             </Link>
-            <Link to='/' style={styles.link}>
-              <Text style={styles.button}>Home</Text>
+            <Link to='/statistics' style={styles.previousholelink}>
+              <Text style={styles.finishholebutton}>Statistics</Text>
             </Link>
           </View>
         </Image>
