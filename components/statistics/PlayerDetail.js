@@ -33,9 +33,11 @@ export default class PlayerDetail extends React.Component {
   }
 
   render() {
+    console.log(this.player)
     let { height, width } = Dimensions.get('window');
     let bests = this._calculateBests(this.player.alltimescores);
     let lastfive = this.player.lastfive.map((obj, i) => {
+      console.log(obj)
       return <View key={i}  style={{ marginBottom: 10,
                                      backgroundColor: 'rgba(52, 52, 52, 0.3)',
                                      width: width - 100,
