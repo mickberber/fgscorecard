@@ -12,13 +12,8 @@ import {
   RanchoDelPueblo
 } from './../../courses/courses';
 
-const keyExtractor = (item, index) => {
-  return item.key;
-}
-
-const keyExtractorHole = (item, index) => {
-  return item.number;
-}
+const keyExtractor = (item, index) => item.key;
+const keyExtractorHole = (item, index) => item.number;
 
 export default class FinishGame extends React.Component {
   constructor(props) {
