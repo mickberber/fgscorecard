@@ -119,6 +119,7 @@ export default class Game extends React.Component {
     this.setState({
       currentHole: this.state.currentHole + 1,
     });
+    this._savegame();
   }
 
   _goOneHoleBack() {
@@ -209,6 +210,7 @@ export default class Game extends React.Component {
     const coursehalf = (currentHole > 9) ?
       this.state.course.back : this.state.course.front;
     let { height, width } = Dimensions.get('window');
+
     /* TODO: remove course related and just use this.state.course */
     return (
       <View style={styles.container}>
