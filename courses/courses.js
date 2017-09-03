@@ -294,3 +294,66 @@ export const SantaTeresa = {
     },
   ],
 };
+
+export const RanchoDelPueblo = {
+  title: 'Rancho Del Pueblo',
+  total: {
+    totalYardage: 1211,
+    par: 32,
+  },
+  front: {
+    totalYardage: null,
+    par: null,
+  },
+  back: {
+    totalYardage: null,
+    par: null,
+  },
+  holes: [
+    {
+      'number': 1,
+      'yardage': 99,
+      'par': 4,
+    },
+    {
+      'number': 2,
+      'yardage': 160,
+      'par': 4,
+    },
+    {
+      'number': 3,
+      'yardage': 138,
+      'par': 3,
+    },
+    {
+      'number': 4,
+      'yardage': 225,
+      'par': 5,
+    },
+    {
+      'number': 5,
+      'yardage': 40,
+      'par': 3,
+    },
+    {
+      'number': 6,
+      'yardage': 194,
+      'par': 4,
+    },
+    {
+      'number': 7,
+      'yardage': 152,
+      'par': 4,
+    },
+    {
+      'number': 8,
+      'yardage': 80,
+      'par': 3,
+    },
+    {
+      'number': 9,
+      'yardage': 123,
+      'par': 3,
+    },
+  ],
+};

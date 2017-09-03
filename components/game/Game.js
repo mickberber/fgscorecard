@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Text, Modal, AsyncStorage, TouchableHighlight, View, FlatList } from 'react-native';
+import { Dimensions, Image, Alert, Text, Modal, AsyncStorage, TouchableHighlight, View, FlatList } from 'react-native';
 import { Redirect } from 'react-router-native';
 
 import PlayerSignup from './../signup/PlayerSignup';
@@ -11,7 +11,8 @@ import {
   MonarchBay,
   Pruneridge,
   LasPositas,
-  SantaTeresa
+  SantaTeresa,
+  RanchoDelPueblo
 } from './../../courses/courses';
 import { styles } from './../../styles/App';
 
@@ -26,8 +27,10 @@ export default class Game extends React.Component {
       showModal: false,
       course: MonarchBay,
       courseTitle: 'Monarch Bay',
+      date: new Date(),
     }
 
+    this._goOneHoleBack = this._goOneHoleBack.bind(this);
     this._playersignup = this._playersignup.bind(this);
     this._pickCourse = this._pickCourse.bind(this);
     this._incrementscore = this._incrementscore.bind(this);
@@ -46,6 +49,8 @@ export default class Game extends React.Component {
         return LasPositas;
       case 'Santa Teresa':
         return SantaTeresa;
+      case 'Rancho Del Pueblo':
+        return RanchoDelPueblo;
       default:
         return MonarchBay;
     }
@@ -67,16 +72,14 @@ export default class Game extends React.Component {
         this.setState({ players });
         break;
       case 'finish':
-        players = this.state.players.map((player) => {
-          return Object.assign({}, player, {
-            scores: player.scores.concat([{key: 0, score: 0}])
-          });
-        });
+        if (this.state.players.length === 0) {
+          Alert.alert('Please enter a name.');
+          return;
+        }
         let course = this._pickCourse(options);
         this.setState({
           currentHole: 1,
           courseTitle: options,
-          players,
           course,
         });
         break;
@@ -86,12 +89,13 @@ export default class Game extends React.Component {
   }
 
   _incrementscore(sign, playerkey) {
+    let index = this.state.currentHole - 1;
     const players = this.state.players.map((player) => {
       if (player.key !== playerkey) {
         return player;
       } else {
-        const key = player.scores[this.state.currentHole - 1].key;
-        const oldscore = player.scores[this.state.currentHole - 1].score;
+        const key = player.scores[index].key;
+        let oldscore = player.scores[index].score;
         let newscore = (sign === '+') ?
           oldscore + 1 : oldscore - 1;
         if (newscore < 0) {
@@ -99,26 +103,30 @@ export default class Game extends React.Component {
         }
         return Object.assign({}, player, {
           scores: player.scores.slice(0, this.state.currentHole - 1)
-                               .concat([{key, score: newscore}])
+                               .concat([{key, score: newscore}]
+                               .concat(player.scores.slice(this.state.currentHole)))
         });
       }
     });
 
     this.setState({
       players,
+      currentHole: this.state.currentHole,
     });
   }
 
   _finishhole() {
-    const players = this.state.players.map((player) => {
-      return Object.assign({}, player, {
-        scores: player.scores.concat([{key: this.state.currentHole, score: 0}]),
-      });
-    });
     this.setState({
       currentHole: this.state.currentHole + 1,
-      players,
     });
+    this._savegame();
+  }
+
+  _goOneHoleBack() {
+    if (this.state.currentHole === 1) {
+      return;
+    }
+    this.setState({currentHole: this.state.currentHole - 1});
   }
 
   _toggleModal() {
@@ -154,8 +162,6 @@ export default class Game extends React.Component {
           courseTitle: 'Monarch Bay',
           showModal: false,
         };
-        // Use to clear db
-        // const val = await AsyncStorage.setItem('games', JSON.stringify([]));
         const val = await AsyncStorage.setItem('currentGame', JSON.stringify(defaultstate));
         this.setState({
           transition: true,
@@ -191,64 +197,75 @@ export default class Game extends React.Component {
                            totalPlayers={this.state.totalPlayers} />
     }
 
-    const currentHole = this.state.currentHole;
-    const coursehalf = (currentHole > 9) ?
-      this.state.course.back : this.state.course.front;
-
     if (this.state.course.holes[this.state.currentHole - 1] === undefined) {
       const game = {
         players: this.state.players,
         courseTitle: this.state.courseTitle,
       };
       return <FinishGame players={this.state.players}
-                         game={game}
-                       />
+                         game={game} />
     }
+
+    const currentHole = this.state.currentHole;
+    const coursehalf = (currentHole > 9) ?
+      this.state.course.back : this.state.course.front;
+    let { height, width } = Dimensions.get('window');
 
     /* TODO: remove course related and just use this.state.course */
     return (
       <View style={styles.container}>
-        <View style={{flex: 1}}>
-          <Text style={styles.coursetitle}>{this.state.course.title}</Text>
-          <CourseHeader totalYardage={this.state.course.total.totalYardage}
-                        totalPar={this.state.course.total.par}
-                        totalHoles={this.state.course.holes.length}
-                        currentHole={currentHole}
-                        coursehalf={coursehalf}
-                        currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
-        </View>
-        <TouchableHighlight onPress={() => { this._finishhole(); }}>
-          <Text style={styles.finishholebutton}>Finish Hole</Text>
-        </TouchableHighlight>
-        <View style={{flex: 2}}>
-          <FlatList data={this.state.players}
-                    renderItem={(player) => <GamePlayer player={player}
-                                                        currentHole={this.state.currentHole}
-                                                        incrementscore={this._incrementscore} />} />
-        </View>
-        <TouchableHighlight onPress={() => { this._toggleModal(); }}>
-          <Text style={styles.resumebutton}>Save/Quit</Text>
-        </TouchableHighlight>
-        <Modal animationType={"slide"}
-               transparent={false}
-               visible={this.state.showModal}>
-               <View style={{
-                 flex: 1,
-                 justifyContent: 'center',
-                 alignItems: 'center',
-                 backgroundColor: 'grey'
-               }} >
-                 <TouchableHighlight onPress={() => { this._toggleModal(); }}>
-                   <Text style={styles.newbutton}>Resume</Text>
-                 </TouchableHighlight>
-                 <TouchableHighlight onPress={() => { this._savegame(); }}>
-                   <Text style={styles.newbutton}>Save</Text>
-                 </TouchableHighlight>
-                 <TouchableHighlight onPress={() => { this._quitgame(); }}>
-                   <Text style={styles.quitbutton}>Quit</Text>
-                 </TouchableHighlight>
-               </View>
-        </Modal>
+        <Image style={styles.image}
+               source={require('./../../assets/footgolf.jpg')}>
+          <View style={{flex: 1}}>
+            <Text style={styles.coursetitle}>{this.state.course.title}</Text>
+            <CourseHeader totalYardage={this.state.course.total.totalYardage}
+                          totalPar={this.state.course.total.par}
+                          totalHoles={this.state.course.holes.length}
+                          currentHole={currentHole}
+                          coursehalf={coursehalf}
+                          currentHoleDetails={this.state.course.holes[this.state.currentHole - 1]} />
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <TouchableHighlight style={styles.previousholelink} onPress={() => { this._goOneHoleBack(); }}>
+              <Text style={styles.finishholebutton}>Previous Hole</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.finishholelink} onPress={() => { this._finishhole(); }}>
+              <Text style={styles.finishholebutton}>Next Hole</Text>
+            </TouchableHighlight>
+          </View>
+          <View style={{flex: 2}}>
+            <FlatList data={this.state.players}
+                      extraData={this.state.currentHole}
+                      renderItem={(player) => <GamePlayer player={player}
+                                                          currentHole={this.state.currentHole}
+                                                          incrementscore={this._incrementscore}
+                                                          height={height}
+                                                          width={width} />} />
+          </View>
+          <TouchableHighlight style={styles.link} onPress={() => { this._toggleModal(); }}>
+            <Text style={styles.button}>Save/Quit</Text>
+          </TouchableHighlight>
+          <Modal animationType={"slide"}
+                 transparent={true}
+                 visible={this.state.showModal}>
+                 <View style={{
+                   flex: 1,
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   backgroundColor: 'rgba(52, 52, 52, 0.7)',
+                 }} >
+                   <TouchableHighlight style={styles.link} onPress={() => { this._toggleModal(); }}>
+                     <Text style={styles.resumebutton}>Resume</Text>
+                   </TouchableHighlight>
+                   <TouchableHighlight style={styles.link} onPress={() => { this._savegame(); }}>
+                     <Text style={styles.resumebutton}>Save</Text>
+                   </TouchableHighlight>
+                   <TouchableHighlight style={styles.link} onPress={() => { this._quitgame(); }}>
+                     <Text style={styles.quitbutton}>Quit</Text>
+                   </TouchableHighlight>
+                 </View>
+          </Modal>
+        </Image>
       </View>
     );
   }

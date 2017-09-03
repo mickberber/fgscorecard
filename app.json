@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "18.0.0"
+    "name": "fgScorecard",
+    "icon": "./assets/icon.png",
+    "version": "1.0.0",
+    "slug": "fgScorecard",
+    "sdkVersion": "18.0.0",
+    "ios": {
+      "bundleIdentifier": "com.fgScorecard.fgScorecard"
+    },
+    "android": {
+      "package": "com.fgScorecard.fgScorecard"
+    }
   }
 }
